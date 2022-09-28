@@ -1,10 +1,13 @@
 package mg.softlab.sirh.department;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mg.softlab.sirh.job.Job;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -24,4 +27,9 @@ public class Department {
 
     @Column(nullable = false)
     private String name;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "department")
+    @JsonManagedReference("job_department")
+    private Collection<Job> jobs;
 }
