@@ -1,13 +1,16 @@
 package mg.softlab.sirh.job;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mg.softlab.sirh.department.Department;
 import mg.softlab.sirh.jobCategory.JobCategory;
+import mg.softlab.sirh.jobOffer.JobOffer;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -39,4 +42,9 @@ public class Job {
     @JoinColumn(name = "department_id")
     @JsonBackReference("job_department")
     private Department department;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "job")
+    @JsonManagedReference("job_offer")
+    private Collection<JobOffer> jobOffers;
 }
