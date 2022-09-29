@@ -7,10 +7,9 @@ import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.job.JobService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/joboffers")
@@ -19,6 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobOfferController {
     private final JobOfferService jobOfferService;
     private final JobService jobService;
+
+    @GetMapping("{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        try {
+            JobOffer jobOffer = jobOfferService.findById(id);
+            return new ResponseEntity<>(jobOffer, HttpStatus.OK);
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/available")
+    public List<JobOffer> getAvailableJobOffers() {
+        return jobOfferService.getAvailableJobOffers();
+    }
 
     @PostMapping
     public ResponseEntity<String> createJobOffer(@RequestParam String title,
