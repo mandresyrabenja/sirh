@@ -12,4 +12,9 @@ public class DegreeCategoryService {
         degreeCategoryRepository.save(degreeCategory);
     }
 
+    public DegreeCategory findById(Long degreeCatId) {
+        return degreeCategoryRepository.findById(degreeCatId).orElseThrow(
+                () -> new IllegalStateException("Aucune catégorie de dimplôme n'a " + degreeCatId + " comme ID")
+        );
+    }
 }

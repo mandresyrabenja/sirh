@@ -13,4 +13,10 @@ public class PersonService {
             throw new IllegalStateException("L'email " + person.getEmail() + " existe déjà");
         personRepository.save(person);
     }
+
+    public Person findById(Long personId) {
+        return personRepository.findById(personId).orElseThrow(
+                () -> new IllegalStateException("Aucune personne n'a " + personId + " comme ID")
+        );
+    }
 }

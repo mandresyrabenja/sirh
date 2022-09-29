@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mg.softlab.sirh.Candidate.Candidate;
+import mg.softlab.sirh.degree.Degree;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -56,4 +57,9 @@ public class Person {
     @OneToMany(mappedBy = "person")
     @JsonManagedReference("person_candidate")
     private Collection<Candidate> candidates;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "person")
+    @JsonManagedReference("person_degree")
+    private Collection<Degree> degrees;
 }
