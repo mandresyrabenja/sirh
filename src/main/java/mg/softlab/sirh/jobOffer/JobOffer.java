@@ -1,12 +1,15 @@
 package mg.softlab.sirh.jobOffer;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mg.softlab.sirh.Candidate.Candidate;
 import mg.softlab.sirh.job.Job;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -38,4 +41,9 @@ public class JobOffer {
 
     @Column(nullable = false)
     private Boolean isDone;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "jobOffer")
+    @JsonManagedReference("job_offer_candidate")
+    private Collection<Candidate> candidates;
 }

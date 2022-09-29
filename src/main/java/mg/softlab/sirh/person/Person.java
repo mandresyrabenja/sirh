@@ -1,13 +1,16 @@
 package mg.softlab.sirh.person;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mg.softlab.sirh.Candidate.Candidate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -48,4 +51,9 @@ public class Person {
 
     @Column(nullable = true)
     private Long cin;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "person")
+    @JsonManagedReference("person_candidate")
+    private Collection<Candidate> candidates;
 }
