@@ -1,4 +1,4 @@
-package mg.softlab.sirh.Candidate;
+package mg.softlab.sirh.candidate;
 
 import lombok.AllArgsConstructor;
 import mg.softlab.sirh.jobOffer.JobOffer;

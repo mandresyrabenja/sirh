@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mg.softlab.sirh.Candidate.Candidate;
+import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.job.Job;
 
 import javax.persistence.*;

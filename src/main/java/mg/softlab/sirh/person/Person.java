@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mg.softlab.sirh.Candidate.Candidate;
+import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.degree.Degree;
 import mg.softlab.sirh.experience.Experience;
 

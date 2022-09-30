@@ -1,4 +1,4 @@
-package mg.softlab.sirh.Candidate;
+package mg.softlab.sirh.candidate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
