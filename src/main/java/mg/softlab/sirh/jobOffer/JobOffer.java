@@ -11,7 +11,7 @@ import mg.softlab.sirh.job.Job;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
+@Entity(name = "job_offer")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -46,4 +46,14 @@ public class JobOffer {
     @OneToMany(mappedBy = "jobOffer")
     @JsonManagedReference("job_offer_candidate")
     private Collection<Candidate> candidates;
+
+    @Override
+    public String toString() {
+        return "JobOffer{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", isDone=" + isDone +
+                '}';
+    }
 }

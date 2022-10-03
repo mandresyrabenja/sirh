@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.degree.Degree;
 import mg.softlab.sirh.experience.Experience;
 
@@ -45,19 +44,11 @@ public class Person {
     @Column(unique = true)
     private String email;
 
-    @Column(nullable = true)
     private Long phone;
 
-    @Column(nullable = true)
     private String address;
 
-    @Column(nullable = true)
     private Long cin;
-
-    @org.springframework.data.annotation.Transient
-    @OneToMany(mappedBy = "person")
-    @JsonManagedReference("person_candidate")
-    private Collection<Candidate> candidates;
 
     @org.springframework.data.annotation.Transient
     @OneToMany(mappedBy = "person")
@@ -68,4 +59,20 @@ public class Person {
     @OneToMany(mappedBy = "person")
     @JsonManagedReference("person_experience")
     private Collection<Experience> experiences;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", dob=" + dob +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                ", address='" + address + '\'' +
+                ", cin=" + cin +
+                ", degrees=" + degrees +
+                ", experiences=" + experiences +
+                '}';
+    }
 }

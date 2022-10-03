@@ -1,6 +1,7 @@
 package mg.softlab.sirh.candidate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,8 @@ public class Candidate {
     private Long id;
 
     @org.springframework.data.annotation.Transient
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
-    @JsonBackReference("person_candidate")
     private Person person;
 
     @org.springframework.data.annotation.Transient
@@ -39,4 +39,14 @@ public class Candidate {
 
     @Column(nullable = false)
     private Boolean isChoosen;
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "id=" + id +
+                ", person=" + person +
+                ", jobOffer=" + jobOffer +
+                ", isChoosen=" + isChoosen +
+                '}';
+    }
 }

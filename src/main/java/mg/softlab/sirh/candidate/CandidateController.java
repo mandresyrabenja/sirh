@@ -9,12 +9,10 @@ import mg.softlab.sirh.person.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/candidates")
@@ -23,7 +21,18 @@ import java.time.LocalDate;
 public class CandidateController {
     private final CandidateService candidateService;
     private final JobOfferService jobOfferService;
-    
+
+    @GetMapping
+    public List<Candidate> getCandidatesByJobOffer(@RequestParam Long jobOfferId) {
+        try {
+            JobOffer jobOffer = jobOfferService.findById(jobOfferId);
+            return candidateService.findCandidateByJobOffer(jobOffer);
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return List.of();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<String> createCandidate(@RequestParam Long jobOfferId,
                                                   @RequestParam String name,
