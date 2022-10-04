@@ -7,12 +7,10 @@ import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
 import mg.softlab.sirh.person.PersonService;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,6 +21,16 @@ public class CandidateController {
     private final CandidateService candidateService;
     private final JobOfferService jobOfferService;
     private final PersonService personService;
+
+    @GetMapping(path = "{id}")
+    public ResponseEntity<Object> getById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(candidateService.findById(id));
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
     /**
      * Trier les candidats d'une offre d'emploi par dimplôme, expérience ou age

@@ -70,4 +70,10 @@ public class CandidateService {
 
         candidateRepository.save(candidate);
     }
+
+    public Candidate findById(Long id) {
+        return candidateRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("Aucune candidature n'a " + id + " comme ID")
+        );
+    }
 }
