@@ -2,11 +2,13 @@ package mg.softlab.sirh.candidate;
 
 import lombok.AllArgsConstructor;
 import mg.softlab.sirh.jobOffer.JobOffer;
+import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CandidateService {
     private final CandidateRepository candidateRepository;
+    private final JobOfferService jobOfferService;
+
     /**
      * Trier les candidats d'une offre d'emploi par dimplôme, expérience ou age
      * @param jobOfferId ID de l'offre d'emploi<br>
@@ -39,6 +43,13 @@ public class CandidateService {
                                         "Aucun candidature n'a " + candidateId + " comme ID") );
                             }
                     )
+                    .collect(Collectors.toList());
+        }
+        if("age".equalsIgnoreCase(sortValue)) {
+            JobOffer jobOffer = jobOfferService.findById(jobOfferId);
+            return candidateRepository.findByJobOffer(jobOffer)
+                    .stream()
+                    .sorted(Comparator.comparingInt(c -> c.getPerson().getAge()))
                     .collect(Collectors.toList());
         }
         throw new IllegalArgumentException("Le valeur du paramètre criteria acceptable sont 'degree', " +

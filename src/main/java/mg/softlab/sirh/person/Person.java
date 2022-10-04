@@ -11,6 +11,7 @@ import mg.softlab.sirh.experience.Experience;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collection;
 
 @Entity
@@ -74,5 +75,9 @@ public class Person {
                 ", degrees=" + degrees +
                 ", experiences=" + experiences +
                 '}';
+    }
+
+    public Integer getAge() {
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 }
