@@ -28,8 +28,16 @@ public class DegreeCategory {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private Integer level;
+
     @org.springframework.data.annotation.Transient
     @OneToMany(mappedBy = "category")
     @JsonManagedReference("category_degree")
     private Collection<Degree> degrees;
+
+    public DegreeCategory(String name, Integer level) {
+        this.name = name;
+        this.level = level;
+    }
 }

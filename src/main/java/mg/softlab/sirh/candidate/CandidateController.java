@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
+import mg.softlab.sirh.person.PersonService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,24 @@ import java.util.List;
 public class CandidateController {
     private final CandidateService candidateService;
     private final JobOfferService jobOfferService;
+    private final PersonService personService;
+
+    /**
+     * Trier les candidats d'une offre d'emploi par dimplôme, expérience ou age
+     * @param jobOfferId ID de l'offre d'emploi<br>
+     * @param criteria chaîne de caractère :<br>
+     *                 <ul>
+     *                  <li><b>"degree"</b> pour diplôme</li>
+     *                  <li><b>"experience"</b> pour l'expérience</li>
+     *                  <li><b>"age"</b> pour le plus jeune au moins jeune</li>
+     *                 </ul>
+     * @return Liste des candidats de l'offre d'emploi triée par dimplôme, expérience ou âge
+     */
+    @GetMapping("/sort")
+    public List<Candidate> sortCandidate(@RequestParam Long jobOfferId,
+                                         @RequestParam String criteria) {
+        return candidateService.sortCandidate(jobOfferId, criteria);
+    }
 
     @GetMapping
     public List<Candidate> getCandidatesByJobOffer(@RequestParam Long jobOfferId) {
@@ -35,35 +54,10 @@ public class CandidateController {
 
     @PostMapping
     public ResponseEntity<String> createCandidate(@RequestParam Long jobOfferId,
-                                                  @RequestParam String name,
-                                                  @RequestParam String firstname,
-                                                  @RequestParam
-                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dob,
-                                                  @RequestParam String email,
-                                                  @RequestParam(required = false) String address,
-                                                  @RequestParam(required = false) Long phone) {
+                                                  @RequestParam Long personId) {
         try {
             JobOffer jobOffer = jobOfferService.findById(jobOfferId);
-
-            if("".equals(name)) {
-                return new ResponseEntity<>("Le champ nom ne peut pas être une chaîne de caractère vide", HttpStatus.NOT_ACCEPTABLE);
-            }
-            if("".equals(firstname) ) {
-                return new ResponseEntity<>("Le champ nom ne peut pas être une chaîne de caractère vide", HttpStatus.NOT_ACCEPTABLE);
-            }
-            if("".equals(email)) {
-                return new ResponseEntity<>("Le champ email ne peut pas être une chaîne de caractère vide", HttpStatus.NOT_ACCEPTABLE);
-            }
-
-            Person person = new Person();
-            person.setName(name);
-            person.setFirstname(firstname);
-            person.setEmail(email);
-            person.setDob(dob);
-            if(null != address)
-                person.setAddress(address);
-            if(null != phone)
-                person.setPhone(phone);
+            Person person = personService.findById(personId);
 
             candidateService.createCandidate(jobOffer, person);
             String msg = "Candidature pour l'offre numero " + jobOffer.getId() + " crée avec succès";
