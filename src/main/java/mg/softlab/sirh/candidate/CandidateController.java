@@ -31,7 +31,7 @@ public class CandidateController {
      *                 <ul>
      *                  <li><b>"degree"</b> pour diplôme</li>
      *                  <li><b>"experience"</b> pour l'expérience</li>
-     *                  <li><b>"age"</b> pour le plus jeune au moins jeune</li>
+     *                  <li><b>"age"</b> pour le plus jeune au plus âgé</li>
      *                 </ul>
      * @return Liste des candidats de l'offre d'emploi triée par dimplôme, expérience ou âge
      */
