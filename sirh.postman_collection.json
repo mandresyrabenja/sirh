@@ -1,0 +1,932 @@
+{
+	"info": {
+		"_postman_id": "3698b711-94b3-4e7b-a5f2-89b243ce9d8f",
+		"name": "sirh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "department",
+			"item": [
+				{
+					"name": "create department",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Département finance\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/departments/",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"departments",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all departments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Département finance\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/departments/",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"departments",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find a department by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Département finance\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/departments/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"departments",
+								"52"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a department",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/departments/52?name=dep RH",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"departments",
+								"52"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "dep RH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a department",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/departments/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"departments",
+								"52"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job category",
+			"item": [
+				{
+					"name": "create job category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Developpeur JS\",\r\n    \"minSalary\": 500000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/jobcategories",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobcategories"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all job categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobcategories",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobcategories"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find a job category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobcategories/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobcategories",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a job category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"OP1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/jobcategories/52?name=OP2&minSalary=250000",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobcategories",
+								"52"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "OP2"
+								},
+								{
+									"key": "minSalary",
+									"value": "250000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a job category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobcategories/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobcategories",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job",
+			"item": [
+				{
+					"name": "create a job",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"\": \"\",\r\n    \"\": 1,\r\n    \"categoryId\": 53\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/jobs?name=Developpeur Java&departmentId=1&categoryId=52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Developpeur Java"
+								},
+								{
+									"key": "departmentId",
+									"value": "1"
+								},
+								{
+									"key": "categoryId",
+									"value": "52"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all jobs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"\": \"\",\r\n    \"\": 1,\r\n    \"categoryId\": 53\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/jobs",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find a job by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobs/2",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a job",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobs/52?name=noob&departmentId=53",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs",
+								"52"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "noob"
+								},
+								{
+									"key": "departmentId",
+									"value": "53"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a job",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobs/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs",
+								"52"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job offer",
+			"item": [
+				{
+					"name": "create a job offer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Offre developpeur JS senior",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum",
+									"type": "text"
+								},
+								{
+									"key": "jobId",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/joboffers",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"joboffers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get availables job offer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/joboffers/available",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"joboffers",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get job offer by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/joboffers/3",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"joboffers",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "person",
+			"item": [
+				{
+					"name": "create a person",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jean\",\r\n    \"firstname\": \"Boo\",\r\n    \"dob\": \"2000-02-03\",\r\n    \"email\": \"jboo@gmail.com\",\r\n    \"address\": \"GHJHG\",\r\n    \"cin\": 111122225631,\r\n    \"phone\": 345268742\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/persons",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all persons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/persons",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"persons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "candidate",
+			"item": [
+				{
+					"name": "create a candidate for a job offer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "jobOfferId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "personId",
+									"value": "152",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get candidates by job offer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "jobOfferId",
+									"value": "1",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sort job offer's candidate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "jobOfferId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "criteria",
+									"value": "experience",
+									"description": "['degree' => trier par diplôme, 'experience' => trier par année d'éxperience, 'age\" => trier du plus jeune au plus âgé]",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/sort",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"sort"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get candidate by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/candidates/54",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"54"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "degree",
+			"item": [
+				{
+					"name": "add a person's degree",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "personId",
+									"value": "153",
+									"type": "text"
+								},
+								{
+									"key": "degreeCatId",
+									"value": "55",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Licence en informatique",
+									"type": "text"
+								},
+								{
+									"key": "establishment",
+									"value": "ITU",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2022",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "345268742",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/degrees",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"degrees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all degree categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "jean",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "baa",
+									"type": "text"
+								},
+								{
+									"key": "personId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "degreeCatId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Licence en informatique",
+									"type": "text"
+								},
+								{
+									"key": "establishment",
+									"value": "ITU",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2022",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "345268742",
+									"type": "text",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/degreecategories",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"degreecategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "experience",
+			"item": [
+				{
+					"name": "add a person's job experience",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "jean",
+									"type": "text"
+								},
+								{
+									"key": "firstname",
+									"value": "baa",
+									"type": "text"
+								},
+								{
+									"key": "personId",
+									"value": "153",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Informaticien",
+									"type": "text"
+								},
+								{
+									"key": "company",
+									"value": "OSTIE",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2011-06-05",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2013-06-10",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/experiences",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"experiences"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
