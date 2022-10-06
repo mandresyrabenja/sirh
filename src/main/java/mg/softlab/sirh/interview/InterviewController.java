@@ -23,6 +23,20 @@ public class InterviewController {
     private final CandidateService candidateService;
     private final JobOfferService jobOfferService;
 
+    @PutMapping
+    public ResponseEntity<String> addCandidateRemark(@RequestParam Long interviewId,
+                                                     @RequestParam String remark) {
+        try {
+            interviewService.addCandidateRemark(interviewId, remark);
+            String msg = "Remarque sur l'interview numero " + interviewId + " ajoutée avec succès";
+            log.info(msg);
+            return  ResponseEntity.ok(msg);
+        }catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
      @GetMapping("/calendar")
     public List<Interview> getInterviewCalendar() { return interviewService.findAll(); }
 

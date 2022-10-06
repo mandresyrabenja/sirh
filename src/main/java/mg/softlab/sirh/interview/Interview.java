@@ -36,9 +36,9 @@ public class Interview {
     private Candidate candidate;
 
     @org.springframework.data.annotation.Transient
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_offer_id")
-    @JsonManagedReference("job_offer_interview")
+    @JsonBackReference("job_offer_interview")
     private JobOffer jobOffer;
 
     @Column(nullable = false)

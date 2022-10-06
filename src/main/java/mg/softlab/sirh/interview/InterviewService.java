@@ -7,6 +7,7 @@ import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.person.Person;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -67,5 +68,17 @@ public class InterviewService {
 
     public List<Interview> findJobInterviews(JobOffer offer) {
         return interviewRepository.findByJobOffer(offer);
+    }
+
+    @Transactional
+    public void addCandidateRemark(Long interviewId, String remark) {
+        Interview interview = findById(interviewId);
+        interview.setRemark(remark);
+    }
+
+    public Interview findById(Long id) {
+        return interviewRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("Aucun entretien d'embauche n'a " + id + " comme ID")
+        );
     }
 }
