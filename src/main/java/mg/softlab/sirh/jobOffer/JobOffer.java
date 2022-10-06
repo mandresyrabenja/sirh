@@ -50,7 +50,7 @@ public class JobOffer {
 
     @org.springframework.data.annotation.Transient
     @OneToMany(mappedBy = "jobOffer")
-    @JsonManagedReference("job_offer_interview")
+    @JsonBackReference("job_offer_interview")
     private Collection<Interview> interviews;
 
     @Override

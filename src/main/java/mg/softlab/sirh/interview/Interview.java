@@ -2,6 +2,7 @@ package mg.softlab.sirh.interview;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,13 +32,13 @@ public class Interview {
 
     @org.springframework.data.annotation.Transient
     @OneToOne
-    @JsonBackReference("candidate_interview")
+    @JsonManagedReference("candidate_interview")
     private Candidate candidate;
 
     @org.springframework.data.annotation.Transient
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_offer_id")
-    @JsonBackReference("job_offer_interview")
+    @JsonManagedReference("job_offer_interview")
     private JobOffer jobOffer;
 
     @Column(nullable = false)

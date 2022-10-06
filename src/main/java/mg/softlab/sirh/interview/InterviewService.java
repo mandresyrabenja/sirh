@@ -16,6 +16,8 @@ public class InterviewService {
     private final InterviewRepository interviewRepository;
     private final EmailService emailService;
 
+    public List<Interview> findAll() { return interviewRepository.findAll(); }
+
     public Interview createInterview(Candidate candidate, JobOffer jobOffer, LocalDateTime dateTime) {
         Interview interview = new Interview();
         interview.setCandidate(candidate);
@@ -29,6 +31,10 @@ public class InterviewService {
         return interview1;
     }
 
+    /**
+     * Envoyer le convocation d'entrien d'embauche d'un candidat par email
+     * @param interview Entretien d'embauche du candidat
+     */
     private void sendCandidateInterviewMail(Interview interview) {
         String subject = "Convoncation à l'entretien d'embauche du poste %s";
         String emailBody = """

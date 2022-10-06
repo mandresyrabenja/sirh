@@ -43,7 +43,7 @@ public class Candidate {
 
     @org.springframework.data.annotation.Transient
     @OneToOne(mappedBy = "candidate")
-    @JsonManagedReference("candidate_interview")
+    @JsonBackReference("candidate_interview")
     private Interview interview;
 
     @Override
