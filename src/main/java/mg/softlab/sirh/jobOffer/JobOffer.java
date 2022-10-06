@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mg.softlab.sirh.candidate.Candidate;
+import mg.softlab.sirh.interview.Interview;
 import mg.softlab.sirh.job.Job;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class JobOffer {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 800)
     private String description;
 
     @org.springframework.data.annotation.Transient
@@ -46,6 +47,11 @@ public class JobOffer {
     @OneToMany(mappedBy = "jobOffer")
     @JsonManagedReference("job_offer_candidate")
     private Collection<Candidate> candidates;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "jobOffer")
+    @JsonManagedReference("job_offer_interview")
+    private Collection<Interview> interviews;
 
     @Override
     public String toString() {

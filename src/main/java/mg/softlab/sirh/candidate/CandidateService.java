@@ -60,15 +60,14 @@ public class CandidateService {
         return candidateRepository.findByJobOffer(jobOffer);
     }
 
-    @Transactional
-    public void createCandidate(JobOffer jobOffer, Person person) {
+    public Candidate createCandidate(JobOffer jobOffer, Person person) {
 
         Candidate candidate = new Candidate();
         candidate.setPerson(person);
         candidate.setJobOffer(jobOffer);
         candidate.setIsChoosen(false);
 
-        candidateRepository.save(candidate);
+        return candidateRepository.save(candidate);
     }
 
     public Candidate findById(Long id) {

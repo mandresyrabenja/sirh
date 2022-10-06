@@ -25,4 +25,10 @@ public class PersonService {
     public List<Person> findAllPersons() {
         return personRepository.findAll();
     }
+
+    public Person findByEmail(String email) {
+        return personRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalStateException("Aucune personne n'a " + email + " comme email")
+        );
+    }
 }

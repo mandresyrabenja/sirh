@@ -21,7 +21,7 @@ public class PersonController {
     public List<Person> getAllPersons() { return personService.findAllPersons(); }
 
     @PostMapping
-    public ResponseEntity<String> createPerson(@RequestBody Person person) {
+    public ResponseEntity<Object> createPerson(@RequestBody Person person) {
         if(null == person.getName() || "".equals(person.getName())) {
             return new ResponseEntity<>("Le champ nom est obligatoire", HttpStatus.NOT_ACCEPTABLE);
         }
@@ -36,7 +36,7 @@ public class PersonController {
         }
         try {
             personService.createPerson(person);
-            return new ResponseEntity<>("Personne crée avec succès", HttpStatus.OK);
+            return ResponseEntity.ok(personService.findByEmail(person.getEmail()));
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

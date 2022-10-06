@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mg.softlab.sirh.interview.Interview;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.person.Person;
 
@@ -39,6 +40,11 @@ public class Candidate {
 
     @Column(nullable = false)
     private Boolean isChoosen;
+
+    @org.springframework.data.annotation.Transient
+    @OneToOne(mappedBy = "candidate")
+    @JsonManagedReference("candidate_interview")
+    private Interview interview;
 
     @Override
     public String toString() {
