@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.interview.Interview;
 import mg.softlab.sirh.job.Job;
+import mg.softlab.sirh.question.Question;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -52,6 +53,11 @@ public class JobOffer {
     @OneToMany(mappedBy = "jobOffer")
     @JsonBackReference("job_offer_interview")
     private Collection<Interview> interviews;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "jobOffer")
+    @JsonManagedReference("job_offer_question")
+    private Collection<Question> questions;
 
     @Override
     public String toString() {
