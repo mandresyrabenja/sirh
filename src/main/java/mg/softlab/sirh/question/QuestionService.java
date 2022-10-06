@@ -22,4 +22,9 @@ public class QuestionService {
     public List<Question> getJobOfferQuestion(JobOffer jobOffer) {
         return questionRepository.findByJobOffer(jobOffer);
     }
+
+    public Question findById(Long id) {
+        return questionRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("Aucune question n'a " + id + " comme ID"));
+    }
 }

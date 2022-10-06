@@ -1,12 +1,15 @@
 package mg.softlab.sirh.question;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mg.softlab.sirh.jobOffer.JobOffer;
+import mg.softlab.sirh.question.response.CandidateResponse;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -39,4 +42,9 @@ public class Question {
      */
     @Column(nullable = false)
     private Short maxMark;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "question")
+    @JsonManagedReference("question_response")
+    private Collection<CandidateResponse> candidateResponses;
 }
