@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.candidate.CandidateService;
+import mg.softlab.sirh.email.EmailService;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,6 +24,7 @@ public class InterviewController {
     private final InterviewService interviewService;
     private final CandidateService candidateService;
     private final JobOfferService jobOfferService;
+    private final EmailService emailService;
 
     @GetMapping
     public List<Interview> getJobInterviews(@RequestParam Long offerId) {

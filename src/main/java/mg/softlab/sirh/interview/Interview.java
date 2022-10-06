@@ -36,13 +36,13 @@ public class Interview {
 
     @org.springframework.data.annotation.Transient
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_id")
+    @JoinColumn(name = "job_offer_id")
     @JsonBackReference("job_offer_interview")
     private JobOffer jobOffer;
 
     @Column(nullable = false)
     @JsonProperty("dateTime")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTime;
 
     @Column(nullable = true)
