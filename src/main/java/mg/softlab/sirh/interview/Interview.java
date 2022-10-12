@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mg.softlab.sirh.candidate.Candidate;
+import mg.softlab.sirh.bonus.Bonus;
 import mg.softlab.sirh.jobOffer.JobOffer;
 
 import javax.persistence.*;
@@ -48,4 +49,10 @@ public class Interview {
 
     @Column(nullable = true)
     private String remark;
+
+    @org.springframework.data.annotation.Transient
+    @OneToOne(mappedBy = "interview")
+    @JsonManagedReference("interview_bonus")
+    private Bonus bonus;
+
 }
