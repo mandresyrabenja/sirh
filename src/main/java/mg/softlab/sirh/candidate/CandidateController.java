@@ -22,6 +22,17 @@ public class CandidateController {
     private final JobOfferService jobOfferService;
     private final PersonService personService;
 
+    @PutMapping("/choose-candidate")
+    public ResponseEntity<String> chooseCandidate(@RequestParam Long candidateId) {
+        try {
+            candidateService.chooseCandidate(candidateId);
+            return ResponseEntity.ok("Candidate numero " + candidateId + " choisi avec succès");
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
     @GetMapping(path = "{id}")
     public ResponseEntity<Object> getById(@PathVariable Long id) {
         try {
