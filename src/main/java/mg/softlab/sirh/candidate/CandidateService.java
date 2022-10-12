@@ -1,6 +1,7 @@
 package mg.softlab.sirh.candidate;
 
 import lombok.AllArgsConstructor;
+import mg.softlab.sirh.email.EmailService;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class CandidateService {
     private final CandidateRepository candidateRepository;
     private final JobOfferService jobOfferService;
+    private final EmailService emailService;
 
     /**
      * Trier les candidats d'une offre d'emploi par dimplôme, expérience ou age
@@ -80,6 +82,37 @@ public class CandidateService {
     public void chooseCandidate(Long candidateId) {
         Candidate candidate = findById(candidateId);
         candidate.setIsChoosen(true);
+
+        sendAcceptationEmail(candidate);
+    }
+
+    private void sendAcceptationEmail(Candidate candidate) {
+        String subject = "Acceptation de candidature pour le poste de %s";
+        String body = """
+                Bonjour %s %s,
+                        
+                A la suite de nos entretiens, nous avons le plaisir de vous informer que votre candidature au poste de %s, a été retenue.
+                        
+                Nous vous remercions de bien vouloir prendre contact avec notre service recrutement le plus rapidement possible afin que nous puissions nous rencontrer.
+                Nous nous tenons à votre disposition  pour tout renseignement complémentaire qu’il vous plairait de nous demander.
+                        
+                Nous vous souhaitons une belle journée.
+
+                Softlab SARLU
+                contact@softlab.mg
+                +261 34 83 088 71
+                """;
+
+        Person person = candidate.getPerson();
+        JobOffer jobOffer = candidate.getJobOffer();
+
+        emailService.sendSimpleMessage(person.getEmail(),
+                String.format(subject, jobOffer.getTitle()),
+                String.format(body,
+                        person.getFirstname(), person.getName(),
+                        jobOffer.getTitle()
+                        )
+            );
     }
 
     public List<Candidate> findChoosenCandidates(Long offerId) {

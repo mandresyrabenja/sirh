@@ -1,7 +1,6 @@
 package mg.softlab.sirh.interview;
 
 import lombok.AllArgsConstructor;
-import mg.softlab.sirh.bonus.BonusService;
 import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.candidate.CandidateService;
 import mg.softlab.sirh.email.EmailService;
