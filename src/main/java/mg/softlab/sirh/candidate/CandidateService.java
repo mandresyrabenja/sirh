@@ -75,4 +75,15 @@ public class CandidateService {
                 () -> new IllegalStateException("Aucune candidature n'a " + id + " comme ID")
         );
     }
+
+    @Transactional
+    public void chooseCandidate(Long candidateId) {
+        Candidate candidate = findById(candidateId);
+        candidate.setIsChoosen(true);
+    }
+
+    public List<Candidate> findChoosenCandidates(Long offerId) {
+        JobOffer jobOffer = jobOfferService.findById(offerId);
+        return candidateRepository.findByIsChoosenTrueAndJobOffer(jobOffer);
+    }
 }
