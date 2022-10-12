@@ -1,5 +1,6 @@
 package mg.softlab.sirh.interview;
 
+import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,4 +39,6 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
         nativeQuery = true
     )
     List<Object[]> orderCandidateResponseByPoint(@Param("offer_id") Long jobOfferId);
+
+    List<Interview> findByCandidate(Candidate candidate);
 }

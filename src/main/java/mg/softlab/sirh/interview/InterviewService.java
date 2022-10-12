@@ -72,6 +72,11 @@ public class InterviewService {
         );
     }
 
+
+    public List<Interview> findCandidateInterview(Candidate candidate) {
+        return interviewRepository.findByCandidate(candidate);
+    }
+
     public List<Interview> findJobInterviews(JobOffer offer) {
         return interviewRepository.findByJobOffer(offer);
     }
@@ -108,4 +113,5 @@ public class InterviewService {
                     })
                 .collect(Collectors.toList());
     }
+
 }

@@ -41,10 +41,18 @@ public class InterviewController {
     public List<Interview> getInterviewCalendar() { return interviewService.findAll(); }
 
     @GetMapping
-    public List<Interview> getJobInterviews(@RequestParam Long offerId) {
+    public List<Interview> getJobInterviews(@RequestParam(required = false) Long offerId,
+                                            @RequestParam(required = false) Long candidateId) {
         try {
-            JobOffer jobOffer = jobOfferService.findById(offerId);
-            return interviewService.findJobInterviews(jobOffer);
+            if(null != offerId) {
+                JobOffer jobOffer = jobOfferService.findById(offerId);
+                return interviewService.findJobInterviews(jobOffer);
+            } else if(null != candidateId) {
+                Candidate candidate = candidateService.findById(candidateId);
+                return interviewService.findCandidateInterview(candidate);
+            } else {
+                throw new IllegalStateException("Une des paramètres 'offerId' et 'candidateId' doît être precisé");
+            }
         } catch (IllegalStateException e) {
             return List.of();
         }
