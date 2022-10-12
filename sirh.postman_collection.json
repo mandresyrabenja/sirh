@@ -527,6 +527,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "order candidate result by points",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offerId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/joboffers/candidate-result",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"joboffers",
+								"candidate-result"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -999,18 +1030,32 @@
 					"response": []
 				},
 				{
-					"name": "get a job offer's interviews list Copy",
+					"name": "add remark about a candidate",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "remark",
+									"value": "Jsp",
+									"type": "text"
+								},
+								{
+									"key": "interviewId",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{site_url}}/interviews/calendar",
+							"raw": "{{site_url}}/interviews",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
-								"interviews",
-								"calendar"
+								"interviews"
 							]
 						}
 					},
@@ -1071,7 +1116,7 @@
 							"formdata": [
 								{
 									"key": "jobOfferId",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								}
 							]
@@ -1083,6 +1128,90 @@
 							],
 							"path": [
 								"questions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "candidate's job interview response",
+			"item": [
+				{
+					"name": "add candidate's job offer response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "54",
+									"type": "text"
+								},
+								{
+									"key": "questionId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mark",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/responses",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"responses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bonus",
+			"item": [
+				{
+					"name": "add candidate bonus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "interviewId",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "bonusReason",
+									"value": "Mlay2",
+									"type": "text"
+								},
+								{
+									"key": "point",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/bonuses",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"bonuses"
 							]
 						}
 					},
