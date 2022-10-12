@@ -1,21 +1,27 @@
 package mg.softlab.sirh.interview;
 
 import lombok.AllArgsConstructor;
+import mg.softlab.sirh.bonus.BonusService;
 import mg.softlab.sirh.candidate.Candidate;
+import mg.softlab.sirh.candidate.CandidateService;
 import mg.softlab.sirh.email.EmailService;
 import mg.softlab.sirh.jobOffer.JobOffer;
+import mg.softlab.sirh.jobOffer.candidateResult.CandidateResult;
 import mg.softlab.sirh.person.Person;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class InterviewService {
     private final InterviewRepository interviewRepository;
     private final EmailService emailService;
+    private final CandidateService candidateService;
 
     public List<Interview> findAll() { return interviewRepository.findAll(); }
 
@@ -80,5 +86,25 @@ public class InterviewService {
         return interviewRepository.findById(id).orElseThrow(
                 () -> new IllegalStateException("Aucun entretien d'embauche n'a " + id + " comme ID")
         );
+    }
+
+    /**
+     * Trier les candidats par la somme des points obtenus
+     * @param jobOfferId ID de l'offre d'emploi
+     * @return Resultat des candidats triées par point obtenus
+     */
+    public List<CandidateResult> orderCandidateResultByPoint(Long jobOfferId) {
+        return interviewRepository.orderCandidateResponseByPoint(jobOfferId)
+                .stream()
+                .map(res -> {
+                    BigInteger candidateId = (BigInteger) res[0];
+                    Double point = (Double) res[1];
+                    return CandidateResult.builder()
+                            .candidate(candidateService.findById(candidateId.longValue()))
+                            .responsePoint(point)
+                            .bonusPoint(Short.parseShort("0"))
+                            .build();
+                    })
+                .collect(Collectors.toList());
     }
 }
