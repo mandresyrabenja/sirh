@@ -744,13 +744,72 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/candidates/54",
+							"raw": "{{site_url}}/candidates/55",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"54"
+								"55"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "choose a candidate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "55",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/choose-candidate",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"choose-candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get choosen candidates for a job offer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offerId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/choosen",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"choosen"
 							]
 						}
 					},
@@ -1045,6 +1104,36 @@
 								{
 									"key": "interviewId",
 									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/interviews",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"interviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a candidate's interview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "55",
 									"type": "text"
 								}
 							]

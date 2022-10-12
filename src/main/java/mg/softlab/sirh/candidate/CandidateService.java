@@ -81,4 +81,9 @@ public class CandidateService {
         Candidate candidate = findById(candidateId);
         candidate.setIsChoosen(true);
     }
+
+    public List<Candidate> findChoosenCandidates(Long offerId) {
+        JobOffer jobOffer = jobOfferService.findById(offerId);
+        return candidateRepository.findByIsChoosenTrueAndJobOffer(jobOffer);
+    }
 }

@@ -22,6 +22,16 @@ public class CandidateController {
     private final JobOfferService jobOfferService;
     private final PersonService personService;
 
+    @GetMapping("/choosen")
+    public List<Candidate> getChoosenCandidates(@RequestParam Long offerId) {
+        try {
+            return candidateService.findChoosenCandidates(offerId);
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return List.of();
+        }
+    }
+
     @PutMapping("/choose-candidate")
     public ResponseEntity<String> chooseCandidate(@RequestParam Long candidateId) {
         try {
