@@ -5,10 +5,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mg.softlab.sirh.interview.Interview;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.person.Person;
+import mg.softlab.sirh.question.response.CandidateResponse;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @AllArgsConstructor
@@ -39,6 +42,16 @@ public class Candidate {
 
     @Column(nullable = false)
     private Boolean isChoosen;
+
+    @org.springframework.data.annotation.Transient
+    @OneToOne(mappedBy = "candidate")
+    @JsonBackReference("candidate_interview")
+    private Interview interview;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "candidate")
+    @JsonManagedReference("candidate_response")
+    private Collection<CandidateResponse> candidateResponses;
 
     @Override
     public String toString() {

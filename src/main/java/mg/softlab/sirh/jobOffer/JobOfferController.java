@@ -3,8 +3,10 @@ package mg.softlab.sirh.jobOffer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mg.softlab.sirh.interview.InterviewService;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.job.JobService;
+import mg.softlab.sirh.jobOffer.candidateResult.CandidateResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,17 @@ import java.util.List;
 public class JobOfferController {
     private final JobOfferService jobOfferService;
     private final JobService jobService;
+    private final InterviewService interviewService;
+
+    /**
+     * Avoir le resultat des entretiens des candidats d'une poste triés par point obtenu
+     * @param jobOfferId ID de l'offre d'emploi
+     * @return le resultat des entretiens des candidats d'une poste triés par point obtenu
+     */
+    @GetMapping("/candidate-result")
+    public List<CandidateResult> getCandidateResult(@RequestParam("offerId") Long jobOfferId) {
+        return interviewService.orderCandidateResultByPoint(jobOfferId);
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<Object> findById(@PathVariable Long id) {
@@ -53,6 +66,18 @@ public class JobOfferController {
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+
+    @PutMapping("/mark-as-done")
+    public ResponseEntity<String> markAsDone(@RequestParam Long offerId) {
+        try {
+            jobOfferService.markAsDone(offerId);
+            return ResponseEntity.ok("Offre numero " + offerId + " marqué comme fini avec succès");
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3698b711-94b3-4e7b-a5f2-89b243ce9d8f",
+		"_postman_id": "6b50ed81-3650-49f2-8dbf-bb0a47687893",
 		"name": "sirh",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -527,6 +527,65 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "order candidate result by points",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offerId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/joboffers/candidate-result",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"joboffers",
+								"candidate-result"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mark job offer as done",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offerId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/joboffers/mark-as-done",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"joboffers",
+								"mark-as-done"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -713,13 +772,72 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/candidates/54",
+							"raw": "{{site_url}}/candidates/55",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"54"
+								"55"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "choose a candidate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "54",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/choose-candidate",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"choose-candidate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get choosen candidates for a job offer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offerId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/choosen",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"choosen"
 							]
 						}
 					},
@@ -921,6 +1039,296 @@
 							],
 							"path": [
 								"experiences"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "interview",
+			"item": [
+				{
+					"name": "create candidate's job interview",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "54",
+									"type": "text"
+								},
+								{
+									"key": "offerId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "dateTime",
+									"value": "2022-10-06T11:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/interviews",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"interviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a job offer's interviews list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "offerId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/interviews",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"interviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add remark about a candidate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "remark",
+									"value": "Jsp",
+									"type": "text"
+								},
+								{
+									"key": "interviewId",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/interviews",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"interviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a candidate's interview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "55",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/interviews",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"interviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "job offer's question",
+			"item": [
+				{
+					"name": "add a job offer's question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "jobOfferId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "question",
+									"value": "Pourquoi vous avez besoin de cet travail?",
+									"type": "text"
+								},
+								{
+									"key": "maxMark",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/questions",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get job offer's questions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "jobOfferId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/questions",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "candidate's job interview response",
+			"item": [
+				{
+					"name": "add candidate's job offer response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "candidateId",
+									"value": "54",
+									"type": "text"
+								},
+								{
+									"key": "questionId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "mark",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/responses",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"responses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bonus",
+			"item": [
+				{
+					"name": "add candidate bonus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "interviewId",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "bonusReason",
+									"value": "Mlay2",
+									"type": "text"
+								},
+								{
+									"key": "point",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/bonuses",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"bonuses"
 							]
 						}
 					},

@@ -28,4 +28,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
             "ORDER BY jour_experience DESC ",
             nativeQuery = true)
     List<Object[]> orderByExperience(@Param("offer_id") Long jobOfferId);
+
+    List<Candidate> findByIsChoosenTrueAndJobOffer(JobOffer jobOffer);
 }
