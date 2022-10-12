@@ -89,7 +89,7 @@ public class InterviewService {
     }
 
     /**
-     * Trier les candidats par la somme des points obtenus
+     * Trier les candidats par la somme des points que chacuns d'eux ont obtenus
      * @param jobOfferId ID de l'offre d'emploi
      * @return Resultat des candidats triées par point obtenus
      */
@@ -99,10 +99,11 @@ public class InterviewService {
                 .map(res -> {
                     BigInteger candidateId = (BigInteger) res[0];
                     Double point = (Double) res[1];
+                    Integer bonus = (Integer) res[2];
                     return CandidateResult.builder()
                             .candidate(candidateService.findById(candidateId.longValue()))
                             .responsePoint(point)
-                            .bonusPoint(Short.parseShort("0"))
+                            .bonusPoint(bonus.shortValue())
                             .build();
                     })
                 .collect(Collectors.toList());
