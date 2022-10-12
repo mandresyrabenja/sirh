@@ -54,11 +54,6 @@ public class JobOffer {
     @JsonManagedReference("job_offer_interview")
     private Collection<Interview> interviews;
 
-    @org.springframework.data.annotation.Transient
-    @OneToMany(mappedBy = "jobOffer")
-    @JsonManagedReference("job_offer_question")
-    private Collection<Question> questions;
-
     @Override
     public String toString() {
         return "JobOffer{" +

@@ -68,4 +68,16 @@ public class JobOfferController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
+
+
+    @PutMapping("/mark-as-done")
+    public ResponseEntity<String> markAsDone(@RequestParam Long offerId) {
+        try {
+            jobOfferService.markAsDone(offerId);
+            return ResponseEntity.ok("Offre numero " + offerId + " marqué comme fini avec succès");
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package mg.softlab.sirh.question;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,7 +30,6 @@ public class Question {
     @org.springframework.data.annotation.Transient
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_offer_id")
-    @JsonBackReference("job_offer_question")
     private JobOffer jobOffer;
 
     @Column(nullable = false)
