@@ -444,6 +444,30 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Search job using name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobs/search?name=ja",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "ja"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -642,6 +666,42 @@
 							],
 							"path": [
 								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search persons by name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "bo",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/persons/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"persons",
+								"search"
 							]
 						}
 					},
@@ -1329,6 +1389,95 @@
 							],
 							"path": [
 								"bonuses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employee",
+			"item": [
+				{
+					"name": "add an employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "personId",
+									"value": "152",
+									"type": "text"
+								},
+								{
+									"key": "hiringDate",
+									"value": "2022-10-13",
+									"type": "text"
+								},
+								{
+									"key": "jobId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "baseSalary",
+									"value": "1000000",
+									"type": "text"
+								},
+								{
+									"key": "contractCategoryId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-10-13",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-01-01",
+									"type": "text"
+								},
+								{
+									"key": "assignment",
+									"value": "abd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employment contract category",
+			"item": [
+				{
+					"name": "get all employment contract categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/contract-categories",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"contract-categories"
 							]
 						}
 					},
