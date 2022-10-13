@@ -15,6 +15,9 @@ import java.util.List;
 public class PersonController {
     private final PersonService personService;
 
+    @GetMapping("/search")
+    public List<Person> searchPerson(@RequestParam String name) { return personService.searchPerson(name); }
+
     @GetMapping
     public List<Person> getAllPersons() { return personService.findAllPersons(); }
 

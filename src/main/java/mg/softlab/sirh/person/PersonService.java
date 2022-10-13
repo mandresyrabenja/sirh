@@ -31,4 +31,6 @@ public class PersonService {
                 () -> new IllegalStateException("Aucune personne n'a " + email + " comme email")
         );
     }
+
+    public List<Person> searchPerson(String name) { return personRepository.searchByName(name); }
 }

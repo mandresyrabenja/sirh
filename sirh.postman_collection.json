@@ -444,6 +444,30 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Search job using name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobs/search?name=ja",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "ja"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -642,6 +666,42 @@
 							],
 							"path": [
 								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search persons by name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "bo",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/persons/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"persons",
+								"search"
 							]
 						}
 					},
