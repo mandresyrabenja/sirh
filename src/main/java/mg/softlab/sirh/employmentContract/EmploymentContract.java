@@ -37,7 +37,7 @@ public class EmploymentContract {
     private Employee employee;
 
     @org.springframework.data.annotation.Transient
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_id")
     private Job job;
 
@@ -48,7 +48,7 @@ public class EmploymentContract {
     private Double baseSalary;
 
     @org.springframework.data.annotation.Transient
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_category_id")
     private EmploymentContractCategory category;
 
