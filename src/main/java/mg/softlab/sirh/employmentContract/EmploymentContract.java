@@ -41,6 +41,9 @@ public class EmploymentContract {
     @JoinColumn(name = "job_id")
     private Job job;
 
+    /**
+     * Salaire de base mensuel
+     */
     @Column(nullable = false)
     private Double baseSalary;
 
