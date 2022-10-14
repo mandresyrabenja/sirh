@@ -2,9 +2,9 @@ package mg.softlab.sirh.employmentContract.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +17,16 @@ import java.util.List;
 @Slf4j
 public class ContractCategoryController {
     private final ContractCategoryService contractCategoryService;
+
+    @GetMapping(path = "{id}")
+    public ResponseEntity<Object> getById(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(contractCategoryService.findById(id));
+        }catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 
     @GetMapping
     public List<EmploymentContractCategory> getAllContractCategories() { return contractCategoryService.findAll(); }

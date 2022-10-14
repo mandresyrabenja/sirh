@@ -21,7 +21,8 @@ public class Employee {
     @Id
     @SequenceGenerator(
             name = "sequence_employee",
-            sequenceName = "sequence_employee"
+            sequenceName = "sequence_employee",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

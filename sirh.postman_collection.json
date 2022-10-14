@@ -1429,7 +1429,7 @@
 								},
 								{
 									"key": "contractCategoryId",
-									"value": "1",
+									"value": "3",
 									"type": "text"
 								},
 								{
@@ -1439,7 +1439,7 @@
 								},
 								{
 									"key": "endDate",
-									"value": "2023-01-01",
+									"value": "2023-01-13",
 									"type": "text"
 								},
 								{
@@ -1456,6 +1456,24 @@
 							],
 							"path": [
 								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/employees/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"52"
 							]
 						}
 					},
@@ -1478,6 +1496,24 @@
 							],
 							"path": [
 								"contract-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get employment contract category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/contract-categories/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"contract-categories",
+								"1"
 							]
 						}
 					},

@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class EmploymentContractService {
     private final EmploymentContractRepository contractRepository;
-    private final PersonService personService;
-    private final JobService jobService;
-    private final ContractCategoryService contractCategoryService;
+
+    public EmploymentContract createEmploymentContract(EmploymentContract contract) {
+        return contractRepository.save(contract);
+    }
 }
