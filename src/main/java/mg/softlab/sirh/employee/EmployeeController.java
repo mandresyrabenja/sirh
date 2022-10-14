@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/employees")
@@ -108,5 +109,10 @@ public class EmployeeController {
             log.warn(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
+    }
+
+    @GetMapping
+    public List<Employee> getEmployees(@RequestParam int page) {
+        return employeeService.getEmployees(page);
     }
 }

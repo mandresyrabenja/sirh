@@ -1409,7 +1409,17 @@
 							"formdata": [
 								{
 									"key": "personId",
-									"value": "152",
+									"value": "203",
+									"type": "text"
+								},
+								{
+									"key": "cnaps",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "ostie",
+									"value": "4567",
 									"type": "text"
 								},
 								{
@@ -1429,7 +1439,7 @@
 								},
 								{
 									"key": "contractCategoryId",
-									"value": "3",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -1467,6 +1477,39 @@
 						"method": "GET",
 						"header": [],
 						"url": {
+							"raw": "{{site_url}}/employees/251",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"251"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add employee cnaps and ostie ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cnaps",
+									"value": "1324",
+									"type": "text"
+								},
+								{
+									"key": "ostie",
+									"value": "7895",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
 							"raw": "{{site_url}}/employees/52",
 							"host": [
 								"{{site_url}}"
@@ -1474,6 +1517,36 @@
 							"path": [
 								"employees",
 								"52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get employees w/ pagination",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees"
 							]
 						}
 					},
@@ -1514,6 +1587,49 @@
 							"path": [
 								"contract-categories",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employment contract",
+			"item": [
+				{
+					"name": "renew an employee employment contract",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "startDate",
+									"value": "2023-01-15",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-03-15",
+									"type": "text"
+								},
+								{
+									"key": "baseSalary",
+									"value": "2000000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/contracts/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"contracts",
+								"52"
 							]
 						}
 					},

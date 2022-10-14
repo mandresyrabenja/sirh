@@ -6,10 +6,12 @@ import mg.softlab.sirh.employmentContract.EmploymentContractService;
 import mg.softlab.sirh.employmentContract.category.EmploymentContractCategory;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.person.Person;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -65,5 +67,9 @@ public class EmployeeService {
         if (null != ostie) {
             employee.setOstie(ostie);
         }
+    }
+
+    public List<Employee> getEmployees(int page) {
+        return employeeRepository.findAll(PageRequest.of(page, 10)).getContent();
     }
 }
