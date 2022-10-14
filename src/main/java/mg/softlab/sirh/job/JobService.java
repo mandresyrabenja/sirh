@@ -44,4 +44,6 @@ public class JobService {
     public void createJob(Job job) {
         jobRepository.save(job);
     }
+
+    public List<Job> searchJob(String name) { return jobRepository.searchJob(name); }
 }

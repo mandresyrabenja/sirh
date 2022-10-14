@@ -21,6 +21,9 @@ public class JobController {
     private final JobCategoryService jobCategoryService;
     private final DepartmentService departmentService;
 
+    @GetMapping("/search")
+    public List<Job> searchJob(@RequestParam String name) { return jobService.searchJob(name); }
+
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id) {
         try {

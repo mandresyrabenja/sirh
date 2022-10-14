@@ -444,6 +444,30 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Search job using name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/jobs/search?name=ja",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobs",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "ja"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -642,6 +666,42 @@
 							],
 							"path": [
 								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search persons by name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "bo",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/persons/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"persons",
+								"search"
 							]
 						}
 					},
@@ -1329,6 +1389,288 @@
 							],
 							"path": [
 								"bonuses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employee",
+			"item": [
+				{
+					"name": "add an employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "personId",
+									"value": "203",
+									"type": "text"
+								},
+								{
+									"key": "cnaps",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "ostie",
+									"value": "4567",
+									"type": "text"
+								},
+								{
+									"key": "hiringDate",
+									"value": "2022-10-13",
+									"type": "text"
+								},
+								{
+									"key": "jobId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "baseSalary",
+									"value": "1000000",
+									"type": "text"
+								},
+								{
+									"key": "contractCategoryId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-10-13",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-01-13",
+									"type": "text"
+								},
+								{
+									"key": "assignment",
+									"value": "abd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/employees/251",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"251"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add employee cnaps and ostie ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cnaps",
+									"value": "1324",
+									"type": "text"
+								},
+								{
+									"key": "ostie",
+									"value": "7895",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get employees w/ pagination",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search employee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "bo",
+									"type": "text"
+								},
+								{
+									"key": "jobName",
+									"value": "js",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employment contract category",
+			"item": [
+				{
+					"name": "get all employment contract categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/contract-categories",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"contract-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get employment contract category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/contract-categories/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"contract-categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "employment contract",
+			"item": [
+				{
+					"name": "renew an employee employment contract",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "startDate",
+									"value": "2023-01-15",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-03-15",
+									"type": "text"
+								},
+								{
+									"key": "baseSalary",
+									"value": "2000000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/contracts/52",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"contracts",
+								"52"
 							]
 						}
 					},
