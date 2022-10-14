@@ -44,6 +44,7 @@ public class EmployeeService {
                 .startDate(startDate)
                 .endDate(endDate)
                 .assignment(assignment)
+                .renew(Short.valueOf("0"))
                 .build();
         contractService.createEmploymentContract(contract);
 

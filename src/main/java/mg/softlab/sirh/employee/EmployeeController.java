@@ -55,6 +55,16 @@ public class EmployeeController {
             if(!"CDI".equalsIgnoreCase(contractCategory.getName()) && null == endDate) {
                 throw new IllegalStateException("Le contrat doit être un CDI pour ne pas avoir de date de fin");
             }
+            // startDate should be before endDate
+            if(!"CDI".equalsIgnoreCase(contractCategory.getName())
+                    && Period.between(startDate, endDate).isNegative()) {
+                throw new IllegalStateException("La date de debut doît être avant la date de fin");
+            }
+            // Un CDD ne peut pas excéder deux ans
+            if("CDD".equalsIgnoreCase(contractCategory.getName())
+                    && (Period.between(startDate, endDate).getYears() >= 2)) {
+                throw new IllegalStateException("Un CDD ne peut pas excéder 2 ans ou plus");
+            }
             // Un contrat de test a pour durée maximale de 6 mois
             if("Contrat de Test".equalsIgnoreCase(contractCategory.getName())
                     && (Period.between(startDate, endDate).getMonths() > 6) ) {

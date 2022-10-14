@@ -60,4 +60,10 @@ public class EmploymentContract {
 
     @Column(nullable = true)
     private String assignment;
+
+    /**
+     * Nombre de fois où le contrat est renouvelé
+     */
+    @Column(nullable = true)
+    private Short renew;
 }
