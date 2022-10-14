@@ -7,6 +7,7 @@ import mg.softlab.sirh.employmentContract.category.EmploymentContractCategory;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.person.Person;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,12 @@ import java.util.List;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmploymentContractService contractService;
+
+    public List<Employee> searchEmployee(String name, String jobName, int page) {
+        Specification<Employee> specification = EmployeeSpecifications.hasNameLike(name)
+                .and(EmployeeSpecifications.hasJobLike(jobName));
+        return employeeRepository.findAll(specification, PageRequest.of(page, 10)).getContent();
+    }
 
     public Employee createEmployee(Employee employee) { return employeeRepository.save(employee); }
 
@@ -34,6 +41,7 @@ public class EmployeeService {
                 .ostie(ostie)
                 .hiringDate(hiringDate)
                 .vacationOrigin(hiringDate)
+                .job(job)
                 .build();
         createEmployee(employee);
 

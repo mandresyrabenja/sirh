@@ -1551,6 +1551,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "search employee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "bo",
+									"type": "text"
+								},
+								{
+									"key": "jobName",
+									"value": "js",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"search"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

@@ -1,11 +1,13 @@
 package mg.softlab.sirh.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mg.softlab.sirh.employmentContract.EmploymentContract;
+import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.person.Person;
 
 import javax.persistence.*;
@@ -33,6 +35,11 @@ public class Employee {
     @org.springframework.data.annotation.Transient
     @OneToOne
     private Person person;
+
+    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "job_id")
+    private Job job;
 
     /**
      * Matricule CNAPS

@@ -27,6 +27,14 @@ public class EmployeeController {
     private final PersonService personService;
     private final JobService jobService;
 
+    @GetMapping("/search")
+    public List<Employee> searchEmployee(@RequestParam(required = false) String name,
+                                         @RequestParam(required = false) String jobName,
+                                         @RequestParam int page)
+    {
+        return employeeService.searchEmployee(name, jobName, page);
+    }
+
     @PostMapping
     public ResponseEntity<Object> createEmployee(@RequestParam Long personId,
                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
