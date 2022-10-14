@@ -20,9 +20,10 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmploymentContractService contractService;
 
-    public List<Employee> searchEmployee(String name, String jobName, int page) {
+    public List<Employee> searchEmployee(String name, String jobName, Long departmentId, int page) {
         Specification<Employee> specification = EmployeeSpecifications.hasNameLike(name)
-                .and(EmployeeSpecifications.hasJobLike(jobName));
+                .and(EmployeeSpecifications.hasJobLike(jobName))
+                .and(EmployeeSpecifications.hasDepartment(departmentId));
         return employeeRepository.findAll(specification, PageRequest.of(page, 10)).getContent();
     }
 

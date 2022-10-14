@@ -30,9 +30,10 @@ public class EmployeeController {
     @GetMapping("/search")
     public List<Employee> searchEmployee(@RequestParam(required = false) String name,
                                          @RequestParam(required = false) String jobName,
+                                         @RequestParam(required = false) Long departmentId,
                                          @RequestParam int page)
     {
-        return employeeService.searchEmployee(name, jobName, page);
+        return employeeService.searchEmployee(name, jobName, departmentId, page);
     }
 
     @PostMapping

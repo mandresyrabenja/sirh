@@ -1,5 +1,6 @@
 package mg.softlab.sirh.employee;
 
+import mg.softlab.sirh.department.Department;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.person.Person;
 import org.springframework.data.jpa.domain.Specification;
@@ -11,6 +12,17 @@ import javax.persistence.criteria.Join;
  * JPA specifications for employee
  */
 public class EmployeeSpecifications {
+
+    public static Specification<Employee> hasDepartment(Long departmentId) {
+        if(null == departmentId) {
+            return null;
+        }
+        return (root, query, cb) -> {
+            Join<Job, Employee> job = root.join("job");
+            Join<Department, Job> department = job.join("department");
+            return cb.equal(department.<Long>get("id"), departmentId);
+        };
+    }
 
     public static Specification<Employee> hasNameLike(String name) {
         if(null == name) {
