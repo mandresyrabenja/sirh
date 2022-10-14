@@ -20,7 +20,7 @@ public class EmployeeService {
     public Employee createEmployee(Employee employee) { return employeeRepository.save(employee); }
 
     @Transactional
-    public Employee createEmployee(Person person, LocalDate hiringDate, Job job,
+    public Employee createEmployee(Person person, String cnaps, String ostie, LocalDate hiringDate, Job job,
                                    EmploymentContractCategory contractCategory, Double baseSalary,
                                    LocalDate startDate, LocalDate endDate, String assignment
                                    )
@@ -28,6 +28,8 @@ public class EmployeeService {
         //Insertion dans le table employee
         Employee employee = Employee.builder()
                 .person(person)
+                .cnaps(cnaps)
+                .ostie(ostie)
                 .hiringDate(hiringDate)
                 .vacationOrigin(hiringDate)
                 .build();
@@ -45,12 +47,22 @@ public class EmployeeService {
                 .build();
         contractService.createEmploymentContract(contract);
 
-        // Mise à jour l'objet employee après l'insertion de son contrat de travail
-        return employeeRepository.getById(employee.getId());
+        return employee;
     }
 
     public Employee findById(Long id) {
         return employeeRepository.findById(id).orElseThrow(() ->
                 new IllegalStateException("Aucun employé n'a " + id + " comme ID"));
+    }
+
+    @Transactional
+    public void addCnapsAndOstie(Long employeeId, String cnaps, String ostie) {
+        Employee employee = findById(employeeId);
+        if(null != cnaps) {
+            employee.setCnaps(cnaps);
+        }
+        if (null != ostie) {
+            employee.setOstie(ostie);
+        }
     }
 }

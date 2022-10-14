@@ -34,6 +34,18 @@ public class Employee {
     @OneToOne
     private Person person;
 
+    /**
+     * Matricule CNAPS
+     */
+    @Column(nullable = true)
+    private String cnaps;
+
+    /**
+     * Matricule OSTIE
+     */
+    @Column(nullable = true)
+    private String ostie;
+
     @Column(nullable = false)
     private LocalDate hiringDate;
 

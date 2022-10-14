@@ -31,6 +31,8 @@ public class EmployeeController {
                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                           LocalDate hiringDate,
                                                   @RequestParam Long jobId,
+                                                  @RequestParam(required = false) String cnaps,
+                                                  @RequestParam(required = false) String ostie,
                                                   @RequestParam Double baseSalary,
                                                   @RequestParam Long contractCategoryId,
                                                   @RequestParam
@@ -64,10 +66,24 @@ public class EmployeeController {
 
             return ResponseEntity.ok(
                     employeeService.createEmployee(
-                        person,hiringDate, job, contractCategory, baseSalary,startDate,
+                        person, cnaps, ostie, hiringDate, job, contractCategory, baseSalary,startDate,
                         endDate, assignment
                     )
             );
+        }catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @PutMapping(path = "{id}")
+    public ResponseEntity<String> addCnapsAndOstie(@PathVariable("id") Long id,
+                                                   @RequestParam(required = false) String cnaps,
+                                                   @RequestParam(required = false) String ostie)
+    {
+        try{
+            employeeService.addCnapsAndOstie(id, cnaps, ostie);
+            return ResponseEntity.ok("Employé numero " + id + " mis à jour avec succès");
         }catch (IllegalStateException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
