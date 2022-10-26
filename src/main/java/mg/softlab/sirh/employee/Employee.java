@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import mg.softlab.sirh.employmentContract.EmploymentContract;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.person.Person;
+import mg.softlab.sirh.vacation.Vacation;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -63,4 +64,9 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @JsonManagedReference("employee_contract")
     private Collection<EmploymentContract> contracts;
+
+    @org.springframework.data.annotation.Transient
+    @OneToMany(mappedBy = "employee")
+    @JsonManagedReference("employee_vacation")
+    private Collection<Vacation> vacations;
 }
