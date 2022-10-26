@@ -1575,7 +1575,12 @@
 								},
 								{
 									"key": "jobName",
-									"value": "js",
+									"value": "dev",
+									"type": "text"
+								},
+								{
+									"key": "departmentId",
+									"value": "53",
 									"type": "text"
 								}
 							]
@@ -1677,6 +1682,197 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "vacation",
+			"item": [
+				{
+					"name": "add employee vacation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "employeeId",
+									"value": "151",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-11-26",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2022-11-26",
+									"type": "text"
+								},
+								{
+									"key": "reason",
+									"value": "up",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/vacations",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"vacations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an employee's vacations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "employeeId",
+									"value": "151",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/vacations",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"vacations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "holiday",
+			"item": [
+				{
+					"name": "create a holiday",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Id Al-Fitr\",\r\n    \"date\": \"2023-04-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/holidays",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all holidays",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/holidays",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a holiday",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "holidayId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-05",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Id Adha",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/holidays",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a holiday",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/holidays?holidayId=3",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							],
+							"query": [
+								{
+									"key": "holidayId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Gestion des jours feriés"
 		}
 	]
 }
