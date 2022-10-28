@@ -62,7 +62,8 @@ public class SirhApplication {
 	 * @param degreeCategoryService Service d'accès au base de données des catégories des diplômes
 	 */
 	/*@Bean
-	public CommandLineRunner run(DegreeCategoryService degreeCategoryService) {
+	public CommandLineRunner run(DegreeCategoryService degreeCategoryService,
+								 AdminService adminService) {
 		return args -> {
 			List<DegreeCategory> degreeCategories = List.of(
 					new DegreeCategory("Certificat/Brevet", 1),
@@ -76,6 +77,12 @@ public class SirhApplication {
 					new DegreeCategory("Doctorat ou plus", 9)
 			);
 			degreeCategories.forEach(degreeCategoryService::createCategory);
+
+			Admin admin = Admin.builder()
+					.username("admin")
+					.password("admin")
+					.build();
+			adminService.createAdmin(admin);
 		};
 	}*/
 
