@@ -1001,6 +1001,67 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "add a candidate pdf cover letter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "coverLetter",
+									"type": "file",
+									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/54/pdf-cover-letter",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"54",
+								"pdf-cover-letter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get candidate cover letter pdf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/54/pdf-cover-letter",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"54",
+								"pdf-cover-letter"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2081,34 +2142,6 @@
 					"response": []
 				},
 				{
-					"name": "update user",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "password",
-									"value": "abcd",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{site_url}}/users/2",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "search user using username",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -2161,6 +2194,34 @@
 							"path": [
 								"users",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "abcd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/2",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"2"
 							]
 						}
 					},

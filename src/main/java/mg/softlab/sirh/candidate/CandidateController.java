@@ -32,13 +32,31 @@ public class CandidateController {
     @Value("${upload.location}")
     private String FILE_DIRECTORY;
 
+
+    /**
+     * Avoir le fichier PDF contenant le LM d'un candidat
+     * @param id ID du candidat
+     * @return le fichier PDF contenant le LM du candidat
+     */
+    @GetMapping(path = "/{id}/pdf-cover-letter", produces = MediaType.APPLICATION_PDF_VALUE)
+    public byte[] getCoverLetterPdf(@PathVariable("id") Long id) {
+        try {
+            return Files.readAllBytes(
+                    Paths.get(FILE_DIRECTORY, "candidates", "lm",  id.toString() + ".pdf")
+            );
+        } catch (IOException e) {
+            log.warn(e.getMessage());
+            return null;
+        }
+    }
+
     /**
      * Avoir le fichier PDF contenant le CV d'un candidat
      * @param id ID du candidat
      * @return le fichier PDF contenant le CV du candidat
      */
     @GetMapping(path = "/{id}/pdf-cv", produces = MediaType.APPLICATION_PDF_VALUE)
-    public byte[] getPhoto(@PathVariable("id") Long id) {
+    public byte[] getCvPdf(@PathVariable("id") Long id) {
         try {
             return Files.readAllBytes(
                     Paths.get(FILE_DIRECTORY, "candidates", "cv",  id.toString() + ".pdf")
@@ -46,6 +64,36 @@ public class CandidateController {
         } catch (IOException e) {
             log.warn(e.getMessage());
             return null;
+        }
+    }
+
+
+    /**
+     * Ajouter un fichier PDF contenant la lettre de motivation d'un candidat
+     * @param candidateId ID du candidat
+     * @param coverLetter Fichier PDF contenant la lettre de motivation
+     * @return Reponse HTTP indiquant le succès ou l'echec de l'opération
+     */
+    @PutMapping(path = "{id}/pdf-cover-letter")
+    public ResponseEntity<String> addCandidateCoverLetterPdf(@PathVariable("id") Long candidateId,
+                                                             @RequestParam("coverLetter") MultipartFile coverLetter)
+    {
+        try {
+            if(!candidateService.existsById(candidateId)) {
+                throw new IllegalStateException("Aucun candidate n'a " + candidateId + " comme ID");
+            }
+
+            // Le fichier doit être un PDF
+            if( !".pdf".equals(Strings.commonSuffix(".pdf", coverLetter.getOriginalFilename())) ) {
+                throw new IllegalStateException("Le LM doit être un fichier PDF");
+            }
+
+            File.saveFile(coverLetter, FILE_DIRECTORY +"/candidates/lm", candidateId + ".pdf");
+
+            return ResponseEntity.ok("LM PDF du candidat numero " + candidateId + " ajouté avec succès");
+        } catch (IllegalStateException | IOException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
