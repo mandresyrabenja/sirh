@@ -157,6 +157,49 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "search department using name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "in",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/departments/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"departments",
+								"search"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1477,13 +1520,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/employees/251",
+							"raw": "{{site_url}}/employees/151",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"employees",
-								"251"
+								"151"
 							]
 						}
 					},
@@ -1696,17 +1739,17 @@
 							"formdata": [
 								{
 									"key": "employeeId",
-									"value": "151",
+									"value": "201",
 									"type": "text"
 								},
 								{
 									"key": "startDate",
-									"value": "2022-11-26",
+									"value": "2022-10-28",
 									"type": "text"
 								},
 								{
 									"key": "endDate",
-									"value": "2022-11-26",
+									"value": "2022-11-02",
 									"type": "text"
 								},
 								{
@@ -1741,7 +1784,7 @@
 							"formdata": [
 								{
 									"key": "employeeId",
-									"value": "151",
+									"value": "201",
 									"type": "text"
 								}
 							]
@@ -1753,6 +1796,37 @@
 							],
 							"path": [
 								"vacations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an employee's rest of vacation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "employeeId",
+									"value": "201",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/vacations/rest",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"vacations",
+								"rest"
 							]
 						}
 					},
@@ -1873,6 +1947,38 @@
 				}
 			],
 			"description": "Gestion des jours feriés"
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create an user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jeanb\",\r\n    \"password\": \"1324\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Gestion des comptes des employés RH"
 		}
 	]
 }

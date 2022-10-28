@@ -15,6 +15,11 @@ import java.util.List;
 public class DepartmentController {
     private final DepartmentService departmentService;
 
+    @GetMapping(path = "/search")
+    public List<Department> searchDepartment(@RequestParam String name) {
+        return departmentService.searchDepartment(name);
+    }
+
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
         try{

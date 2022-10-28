@@ -11,6 +11,8 @@ import java.util.List;
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
 
+    public List<Department> searchDepartment(String name) { return departmentRepository.searchDepartment(name); }
+
     public void deleteDepartment(Long id) {
         Department department = findById(id);
         departmentRepository.delete(department);
