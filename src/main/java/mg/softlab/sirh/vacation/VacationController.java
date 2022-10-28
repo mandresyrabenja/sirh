@@ -20,6 +20,22 @@ public class VacationController {
     private final VacationService vacationService;
     private final EmployeeService employeeService;
 
+    /**
+     * Avoir le nombre des jours de congé restant d'un employé
+     * @param employeeId ID de l'employé
+     * @return le nombre des jours de congé restant de l'employé
+     */
+    @GetMapping("/rest")
+    public ResponseEntity<Object> getEmployeeRestOfDayOff(@RequestParam Long employeeId) {
+        try {
+            Employee employee = employeeService.findById(employeeId);
+            return ResponseEntity.ok(vacationService.getRestDayOff(employee));
+        } catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
     @GetMapping
     public List<Vacation> getEmployeeVacations(@RequestParam Long employeeId) {
         try {

@@ -237,7 +237,7 @@ public class VacationService {
      * @param employee L'employé
      * @return Le nombre des jours des congés non pris par l'employé
      */
-    private double getRestDayOff(Employee employee) {
+    public double getRestDayOff(Employee employee) {
         Vacation lastVacation = getEmployeeLastVacation(employee);
         long nbCalendarMonth = getNbCalendarMonth(lastVacation.getStartDate());
         return lastVacation.getRest() + (nbCalendarMonth * 2.5);
