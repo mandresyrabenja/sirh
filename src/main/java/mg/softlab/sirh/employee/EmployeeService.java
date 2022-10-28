@@ -20,6 +20,14 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmploymentContractService contractService;
 
+    @Transactional
+    public void updateEmployee(Long employeeId, LocalDate vacationOrigin) {
+        Employee employee = findById(employeeId);
+        if(null != vacationOrigin) {
+            employee.setVacationOrigin(vacationOrigin);
+        }
+    }
+
     public List<Employee> searchEmployee(String name, String jobName, Long departmentId, int page) {
         Specification<Employee> specification = EmployeeSpecifications.hasNameLike(name)
                 .and(EmployeeSpecifications.hasJobLike(jobName))
@@ -41,7 +49,7 @@ public class EmployeeService {
                 .cnaps(cnaps)
                 .ostie(ostie)
                 .hiringDate(hiringDate)
-                .vacationOrigin(hiringDate)
+                .vacationOrigin(hiringDate.plusYears(1))
                 .job(job)
                 .build();
         createEmployee(employee);
