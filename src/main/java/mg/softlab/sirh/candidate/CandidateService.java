@@ -1,11 +1,15 @@
 package mg.softlab.sirh.candidate;
 
+import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
 import mg.softlab.sirh.email.EmailService;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
+import mg.softlab.sirh.util.file.File;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;
@@ -118,5 +122,9 @@ public class CandidateService {
     public List<Candidate> findChoosenCandidates(Long offerId) {
         JobOffer jobOffer = jobOfferService.findById(offerId);
         return candidateRepository.findByIsChoosenTrueAndJobOffer(jobOffer);
+    }
+
+    public boolean existsById(Long id) {
+        return candidateRepository.existsById(id);
     }
 }

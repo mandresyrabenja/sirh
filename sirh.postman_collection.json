@@ -894,21 +894,16 @@
 						"header": [],
 						"body": {
 							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "candidateId",
-									"value": "54",
-									"type": "text"
-								}
-							]
+							"formdata": []
 						},
 						"url": {
-							"raw": "{{site_url}}/candidates/choose-candidate",
+							"raw": "{{site_url}}/candidates/54/choose-candidate",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
+								"54",
 								"choose-candidate"
 							]
 						}
@@ -941,6 +936,67 @@
 							"path": [
 								"candidates",
 								"choosen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add a candidate pdf cv",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/54/pdf-cv",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"54",
+								"pdf-cv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get candidate pdf cv",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/54/pdf-cv",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"54",
+								"pdf-cv"
 							]
 						}
 					},
@@ -1958,7 +2014,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jeanb\",\r\n    \"password\": \"1324\"\r\n}",
+							"raw": "{\r\n    \"username\": \"jean\",\r\n    \"password\": \"1324\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1972,6 +2028,139 @@
 							],
 							"path": [
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/users",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users/2",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "abcd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/2",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search user using username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "B",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete an user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users/3",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"3"
 							]
 						}
 					},
