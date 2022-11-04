@@ -45,6 +45,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User createUser(User user) {
+        if(userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalStateException("Le nom d'utilisateur " + user.getUsername() + " existe déjà");
+        }
         user.setPassword(Sha256.hash(user.getPassword()));
         return userRepository.save(user);
     }

@@ -38,6 +38,9 @@ public class AdminService implements UserDetailsService {
     }
 
     public Admin createAdmin(Admin admin) {
+        if(adminRepository.existsByUsername(admin.getUsername())) {
+            throw new IllegalStateException("Le nom d'utilisateur " + admin.getUsername() + " existe déjà");
+        }
         admin.setPassword(Sha256.hash(admin.getPassword()));
         return adminRepository.save(admin);
     }

@@ -58,5 +58,12 @@ public class UserController {
     public List<User> getAllUsers() { return userService.findAll(); }
 
     @PostMapping
-    public User createUser(@RequestBody User user) { return userService.createUser(user); }
+    public ResponseEntity createUser(@RequestBody User user) {
+        try{
+            return ResponseEntity.ok(userService.createUser(user));
+        }catch (IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 }

@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    Boolean existsByUsername(String username);
+
     Optional<User> findByUsernameIgnoreCase(String username);
 
     @Query("SELECT u FROM simple_user u WHERE lower(u.username) LIKE lower(concat('%', :username,'%') ) ")
