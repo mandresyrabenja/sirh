@@ -515,6 +515,203 @@
 			]
 		},
 		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create an user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jean ba\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/users",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users/4",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search user using username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "B",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete an user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users/3",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "abcd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/2",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Gestion des comptes des employés RH"
+		},
+		{
 			"name": "job offer",
 			"item": [
 				{
@@ -942,35 +1139,6 @@
 					"response": []
 				},
 				{
-					"name": "add a candidate pdf cv",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "cv",
-									"type": "file",
-									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{site_url}}/candidates/54/pdf-cv",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"candidates",
-								"54",
-								"pdf-cv"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "get candidate pdf cv",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1058,6 +1226,35 @@
 								"candidates",
 								"54",
 								"pdf-cover-letter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add a candidate pdf cv",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/54/pdf-cv",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"54",
+								"pdf-cv"
 							]
 						}
 					},
@@ -2064,171 +2261,36 @@
 				}
 			],
 			"description": "Gestion des jours feriés"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY2NzU3MzY3MiwiZXhwIjoxNjY4NzE4ODAwfQ.uhNubKo0XUSCQbF0aTY3zkDwuUochi1nh9Ng5Tzh0lcuJ0a3EUrvh0yxCi2Lp5V4G0_FFRoX4P8AePQuY8PuuQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "user",
-			"item": [
-				{
-					"name": "create an user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jean\",\r\n    \"password\": \"1324\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/users",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{site_url}}/users",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get an user by id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/users/2",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "search user using username",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "username",
-									"value": "B",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{site_url}}/users/search",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"search"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete an user",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/users/3",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update user",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "password",
-									"value": "abcd",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{site_url}}/users/2",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"2"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"description": "Gestion des comptes des employés RH"
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
