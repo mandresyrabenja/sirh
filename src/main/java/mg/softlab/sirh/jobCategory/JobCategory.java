@@ -31,6 +31,9 @@ public class JobCategory {
     @Column(nullable = false)
     private Double minSalary;
 
+    @Column(nullable = false)
+    private Double maxSalary;
+
     @org.springframework.data.annotation.Transient
     @OneToMany(mappedBy = "jobCategory")
     @JsonManagedReference("job_category")

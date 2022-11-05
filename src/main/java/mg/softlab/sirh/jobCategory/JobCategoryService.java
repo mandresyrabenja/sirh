@@ -23,6 +23,10 @@ public class JobCategoryService {
             bdJobCategory.setMinSalary(newJobCategoryData.getMinSalary());
         }
 
+        if(newJobCategoryData.getMaxSalary() != null && newJobCategoryData.getMaxSalary() != 0) {
+            bdJobCategory.setMaxSalary(newJobCategoryData.getMaxSalary());
+        }
+
         if(newJobCategoryData.getName() != null && newJobCategoryData.getName() != "") {
             bdJobCategory.setName(newJobCategoryData.getName());
         }
@@ -40,5 +44,9 @@ public class JobCategoryService {
 
     public void createJobCategory(JobCategory jobCategory) {
         jobCategoryRepository.save(jobCategory);
+    }
+
+    public List<JobCategory> searchJobCat(String name) {
+        return jobCategoryRepository.searchJobCat(name);
     }
 }
