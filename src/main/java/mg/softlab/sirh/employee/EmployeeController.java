@@ -1,5 +1,6 @@
 package mg.softlab.sirh.employee;
 
+import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.employmentContract.category.ContractCategoryService;
@@ -8,11 +9,18 @@ import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.job.JobService;
 import mg.softlab.sirh.person.Person;
 import mg.softlab.sirh.person.PersonService;
+import mg.softlab.sirh.util.file.File;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -26,6 +34,51 @@ public class EmployeeController {
     private final ContractCategoryService contractCategoryService;
     private final PersonService personService;
     private final JobService jobService;
+    @Value("${upload.location}")
+    private String FILE_DIRECTORY;
+
+    /**
+     * Avoir le photo d'un employé
+     * @param id ID de l'employé
+     * @return le photo de l'employé
+     */
+    @GetMapping(path = "/{id}/photo", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getEmployeePhoto(@PathVariable("id") Long id) {
+        try {
+            return Files.readAllBytes(
+                    Paths.get(FILE_DIRECTORY, "employee",  id.toString() + ".png")
+            );
+        } catch (IOException e) {
+            log.warn(e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Ajouter le photo d'un employé
+     * @param employeeId ID de l'employé
+     * @param photo Photo de l'employé
+     * @return Reponse HTTP indiquant le succès ou l'echec de l'opération
+     */
+    @PutMapping(path = "{id}/photo")
+    public ResponseEntity<String> addEmployeePhoto(@PathVariable("id") Long employeeId,
+                                                             @RequestParam("photo") MultipartFile photo)
+    {
+        try {
+            if(!employeeService.existsById(employeeId)) {
+                throw new IllegalStateException("Aucun employé n'a " + employeeId + " comme ID");
+            }
+
+            File.saveFile(photo, FILE_DIRECTORY +"/employee", employeeId + ".png");
+
+            String msg = "Photo de l'employé numero " + employeeId + " ajoutée avec succès";
+            log.info(msg);
+            return ResponseEntity.ok(msg);
+        } catch (IllegalStateException | IOException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 
     @GetMapping("/search")
     public List<Employee> searchEmployee(@RequestParam(required = false) String name,

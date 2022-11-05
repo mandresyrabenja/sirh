@@ -89,4 +89,6 @@ public class EmployeeService {
     public List<Employee> getEmployees(int page) {
         return employeeRepository.findAll(PageRequest.of(page, 10)).getContent();
     }
+
+    public Boolean existsById(Long employeeId) { return employeeRepository.existsById(employeeId); }
 }

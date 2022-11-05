@@ -213,7 +213,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Developpeur JS\",\r\n    \"minSalary\": 500000\r\n}",
+							"raw": "{\r\n    \"name\": \"Developpeur JS\",\r\n    \"minSalary\": 500000,\r\n    \"maxSalary\": 1000000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,7 +303,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{site_url}}/jobcategories/52?name=OP2&minSalary=250000",
+							"raw": "{{site_url}}/jobcategories/52?name=OP2&minSalary=250000&maxSalary=500000",
 							"host": [
 								"{{site_url}}"
 							],
@@ -319,6 +319,10 @@
 								{
 									"key": "minSalary",
 									"value": "250000"
+								},
+								{
+									"key": "maxSalary",
+									"value": "500000"
 								}
 							]
 						}
@@ -338,6 +342,44 @@
 							"path": [
 								"jobcategories",
 								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search job categories by name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "o",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/jobcategories/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"jobcategories",
+								"search"
 							],
 							"query": [
 								{
@@ -556,7 +598,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jean ba\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"username\": \"jhon\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1954,6 +1996,61 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "add an employee's photo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/D:/Pro/CV/IMG_3561.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/employees/52/photo",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"52",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an employee's photo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{site_url}}/employees/52/photo",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"52",
+								"photo"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2268,7 +2365,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY2NzU3MzY3MiwiZXhwIjoxNjY4NzE4ODAwfQ.uhNubKo0XUSCQbF0aTY3zkDwuUochi1nh9Ng5Tzh0lcuJ0a3EUrvh0yxCi2Lp5V4G0_FFRoX4P8AePQuY8PuuQ",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY2NzU3NDI2MCwiZXhwIjoxNjY4NzE4ODAwfQ.W-iXdyI6cfm22pfUajZmddB2xWA3rE_ne6-89Kye2B1kafWOI8TX1BcaOFZfV2gs_eECwy1b45BoAE_LbZ_pOg",
 				"type": "string"
 			}
 		]
