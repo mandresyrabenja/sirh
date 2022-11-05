@@ -17,6 +17,9 @@ import java.util.List;
 public class HolidayController {
     private final HolidayService holidayService;
 
+    @GetMapping(path = "/search")
+    public List<Holiday> searchHoliday(@RequestParam String name) { return holidayService.searchHoliday(name); }
+
     @PutMapping
     public ResponseEntity<String> updateHoliday(@RequestParam Long holidayId,
                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

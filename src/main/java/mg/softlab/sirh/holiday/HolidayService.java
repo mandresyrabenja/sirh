@@ -40,4 +40,8 @@ public class HolidayService {
     public void deleteHoliday(Long holidayId) {
         holidayRepository.delete(findById(holidayId));
     }
+
+    public List<Holiday> searchHoliday(String name) {
+        return holidayRepository.searchHoliday(name);
+    }
 }

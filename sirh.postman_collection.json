@@ -905,7 +905,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Jean\",\r\n    \"firstname\": \"Boo\",\r\n    \"dob\": \"2000-02-03\",\r\n    \"email\": \"jboo@gmail.com\",\r\n    \"address\": \"GHJHG\",\r\n    \"cin\": 111122225631,\r\n    \"phone\": 345268742\r\n}",
+							"raw": "{\r\n    \"name\": \"Jean\",\r\n    \"firstname\": \"Boo\",\r\n    \"dob\": \"2000-02-03\",\r\n    \"email\": \"jboo@gmail.com\",\r\n    \"address\": \"GHJHG\",\r\n    \"cin\": 111122225631,\r\n    \"phone\": 345268742,\r\n    \"gender\": \"m\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2351,6 +2351,42 @@
 									"key": "holidayId",
 									"value": "3"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search holiday using name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "29",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/holidays/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays",
+								"search"
 							]
 						}
 					},
