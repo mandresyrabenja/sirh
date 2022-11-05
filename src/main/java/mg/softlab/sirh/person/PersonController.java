@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static mg.softlab.sirh.person.Gender.*;
 
 import java.util.List;
 
@@ -35,9 +36,17 @@ public class PersonController {
         if(null == person.getDob()) {
             return new ResponseEntity<>("Le champ date de naissance est obligatoire", HttpStatus.NOT_ACCEPTABLE);
         }
+        if(null == person.getGender()) {
+            return new ResponseEntity<>("Le champ genre est obligatoire", HttpStatus.NOT_ACCEPTABLE);
+        }
+        if( !MALE.getGender().equalsIgnoreCase(person.getGender()) &&
+                !FEMALE.getGender().equalsIgnoreCase(person.getGender()) ) {
+            return new ResponseEntity<>("Le genre doît être 'M' pour homme et 'F' pour femme", HttpStatus.NOT_ACCEPTABLE);
+        }
         try {
-            personService.createPerson(person);
-            return ResponseEntity.ok(personService.findByEmail(person.getEmail()));
+            person = personService.createPerson(person);
+            log.info("Personne numero " + person.getId() + " créée avec succès");
+            return ResponseEntity.ok(person);
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);

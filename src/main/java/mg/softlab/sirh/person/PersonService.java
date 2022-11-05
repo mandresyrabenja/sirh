@@ -10,10 +10,10 @@ import java.util.List;
 public class PersonService {
     private final PersonRepository personRepository;
 
-    public void createPerson(Person person) {
+    public Person createPerson(Person person) {
         if(personRepository.existsByEmail(person.getEmail()))
             throw new IllegalStateException("L'email " + person.getEmail() + " existe déjà");
-        personRepository.save(person);
+        return personRepository.save(person);
     }
 
     public Person findById(Long personId) {

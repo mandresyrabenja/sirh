@@ -51,6 +51,9 @@ public class Person {
 
     private Long cin;
 
+    @Column(length = 1)
+    private String gender;
+
     @org.springframework.data.annotation.Transient
     @OneToMany(mappedBy = "person")
     @JsonManagedReference("person_degree")
