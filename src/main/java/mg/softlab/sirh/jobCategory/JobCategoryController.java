@@ -26,7 +26,7 @@ public class JobCategoryController {
             return new ResponseEntity<>("Catégorie de travail effacé avec succès", HttpStatus.OK);
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -37,13 +37,13 @@ public class JobCategoryController {
                                                     @RequestParam(required = false) Double maxSalary)
     {
         JobCategory jobCategory = new JobCategory();
-        if(name != null && name != "")
+        if(null != name && !"".equalsIgnoreCase(name))
             jobCategory.setName(name);
 
-        if(minSalary != null && minSalary != 0)
+        if(null != minSalary && minSalary != 0)
             jobCategory.setMinSalary(minSalary);
 
-        if(maxSalary != null && maxSalary != 0)
+        if(null != maxSalary && maxSalary != 0)
             jobCategory.setMaxSalary(maxSalary);
 
         try {
@@ -74,19 +74,19 @@ public class JobCategoryController {
 
     @PostMapping
     public ResponseEntity<String> createJobCategory(@RequestBody JobCategory jobCategory) {
-        if( (jobCategory.getName() == null) || (jobCategory.getName() == "") )
+        if( (null == jobCategory.getName()) || ("".equals(jobCategory.getName())) )
             return new ResponseEntity<>("Le nom est obligatoire", HttpStatus.NOT_ACCEPTABLE);
 
-        if (jobCategory.getMinSalary() == null)
+        if (null == jobCategory.getMinSalary())
             return new ResponseEntity<>("Le champ du salaire minimale est obligatoire", HttpStatus.NOT_ACCEPTABLE);
 
-        if (jobCategory.getMaxSalary() == null)
+        if (null == jobCategory.getMaxSalary())
             return new ResponseEntity<>("Le champ du salaire maximale est obligatoire", HttpStatus.NOT_ACCEPTABLE);
 
         if(jobCategory.getMinSalary() >= jobCategory.getMaxSalary())
             return new ResponseEntity<>("Le salaire maximale doît être supérieur au salaire minimale", HttpStatus.NOT_ACCEPTABLE);
 
         jobCategoryService.createJobCategory(jobCategory);
-        return new ResponseEntity<>("Catégorie proféssionelle crée avec succès ", HttpStatus.NOT_ACCEPTABLE);
+        return ResponseEntity.ok("Catégorie proféssionelle crée avec succès ");
     }
 }

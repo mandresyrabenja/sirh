@@ -71,4 +71,8 @@ public class UserService implements UserDetailsService {
         userRepository.delete(findById(userId));
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsernameIgnoreCase(username).orElseThrow( () ->
+                new IllegalStateException("Aucun utilisateur n'a '" + username + "' comme nom d'utilisateur"));
+    }
 }

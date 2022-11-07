@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,29 +14,39 @@ import java.util.List;
 @RequestMapping("api/v1/users")
 @RequiredArgsConstructor
 @Slf4j
-@PreAuthorize("hasRole('CEO')")
 public class UserController {
     private final UserService userService;
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('CEO')")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long userId) {
         try {
             userService.deleteUser(userId);
             return ResponseEntity.ok("Utilisateur numero " + userId + " effacé avec succès");
         }catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasRole('CEO')")
     public List<User> search(@RequestParam String username) {
         return userService.search(username);
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<String> updateUser(@PathVariable("id") Long userId, @RequestParam String password) {
+    @PreAuthorize("hasRole('HR_EMPLOYEE')")
+    public ResponseEntity<String> updateUser(Authentication authentication,
+                                             @PathVariable("id") Long userId,
+                                             @RequestParam String password)
+    {
         try {
+            String username = (String) authentication.getPrincipal();
+            User user = userService.findByUsername(username);
+            if(!user.getId().equals(userId)) {
+                throw new IllegalStateException("Vous ne pouvez pas modifier le mot de passe des autres comptes à part le votre");
+            }
             userService.updateUser(userId, password);
             return ResponseEntity.ok("Utilisateur numero " + userId + " modifié avec succès");
         }catch (IllegalStateException e) {
@@ -45,25 +56,27 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity getUser(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
         try {
             return ResponseEntity.ok(userService.findById(id));
         }catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('CEO')")
     public List<User> getAllUsers() { return userService.findAll(); }
 
     @PostMapping
-    public ResponseEntity createUser(@RequestBody User user) {
+    @PreAuthorize("hasRole('CEO')")
+    public ResponseEntity<Object> createUser(@RequestBody User user) {
         try{
             return ResponseEntity.ok(userService.createUser(user));
         }catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }
     }
 }
