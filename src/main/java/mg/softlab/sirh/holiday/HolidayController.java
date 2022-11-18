@@ -20,6 +20,16 @@ public class HolidayController {
     @GetMapping(path = "/search")
     public List<Holiday> searchHoliday(@RequestParam String name) { return holidayService.searchHoliday(name); }
 
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Object> searchHoliday(@PathVariable("id") Long id) {
+        try {
+            return ResponseEntity.ok(holidayService.findById(id));
+        } catch(IllegalStateException e) {
+            log.warn(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping
     public ResponseEntity<String> updateHoliday(@RequestParam Long holidayId,
                                                 @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

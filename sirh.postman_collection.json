@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Département finance\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Département de ressources humaines\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -557,6 +557,174 @@
 			]
 		},
 		{
+			"name": "holiday",
+			"item": [
+				{
+					"name": "create a holiday",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Id Al-Fitr\",\r\n    \"date\": \"2023-04-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/holidays",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all holidays",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/holidays",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a holiday",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "holidayId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2023-01-05",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Id Adha",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/holidays",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a holiday",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/holidays?holidayId=3",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays"
+							],
+							"query": [
+								{
+									"key": "holidayId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search holiday using name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "29",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/holidays/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get holiday by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/holidays/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"holidays",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Gestion des jours feriés"
+		},
+		{
 			"name": "authentication",
 			"item": [
 				{
@@ -652,13 +820,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{site_url}}/users/4",
+							"raw": "{{site_url}}/users/7",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"users",
-								"4"
+								"7"
 							]
 						}
 					},
@@ -2244,156 +2412,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "holiday",
-			"item": [
-				{
-					"name": "create a holiday",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Id Al-Fitr\",\r\n    \"date\": \"2023-04-25\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/holidays",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"holidays"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all holidays",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{site_url}}/holidays",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"holidays"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update a holiday",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "holidayId",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "date",
-									"value": "2023-01-05",
-									"type": "text"
-								},
-								{
-									"key": "name",
-									"value": "Id Adha",
-									"type": "text"
-								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/holidays",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"holidays"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete a holiday",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{site_url}}/holidays?holidayId=3",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"holidays"
-							],
-							"query": [
-								{
-									"key": "holidayId",
-									"value": "3"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "search holiday using name",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "29",
-									"type": "text"
-								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/holidays/search",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"holidays",
-								"search"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"description": "Gestion des jours feriés"
 		}
 	],
 	"auth": {
@@ -2401,7 +2419,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY2NzU3NDI2MCwiZXhwIjoxNjY4NzE4ODAwfQ.W-iXdyI6cfm22pfUajZmddB2xWA3rE_ne6-89Kye2B1kafWOI8TX1BcaOFZfV2gs_eECwy1b45BoAE_LbZ_pOg",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY2ODc4ODQxMCwiZXhwIjoxNjY5OTI4NDAwfQ.SPzlKtsUm1UfFVIUGPpVH2c-v2Znhibi6KOBZ_UE4kBAm-XdAO-9hZqSjSCpRRgGzHJtVrDRgujkVcKWbwUB1Q",
 				"type": "string"
 			}
 		]
