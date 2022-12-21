@@ -71,7 +71,9 @@ public class SirhApplication {
 	 */
 	/*@Bean
 	public CommandLineRunner run(DegreeCategoryService degreeCategoryService,
-								 AdminService adminService) {
+								 AdminService adminService,
+								 ContractCategoryService contractCategoryService)
+	{
 		return args -> {
 			List<DegreeCategory> degreeCategories = List.of(
 					new DegreeCategory("Certificat/Brevet", 1),
@@ -85,6 +87,11 @@ public class SirhApplication {
 					new DegreeCategory("Doctorat ou plus", 9)
 			);
 			degreeCategories.forEach(degreeCategoryService::createCategory);
+
+			contractCategoryService.createContractCategory("CDI");
+			contractCategoryService.createContractCategory("CDD");
+			contractCategoryService.createContractCategory("Contrat de Test");
+			contractCategoryService.createContractCategory("Stage");
 
 			Admin admin = Admin.builder()
 					.username("admin")

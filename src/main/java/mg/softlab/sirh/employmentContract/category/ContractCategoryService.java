@@ -19,4 +19,11 @@ public class ContractCategoryService {
         return contractCategoryRepository.findById(id).orElseThrow(() ->
                 new IllegalStateException("Aucune catégorie de contrat de travail n'a " + id + " comme ID"));
     }
+
+    public EmploymentContractCategory createContractCategory(String name) {
+        EmploymentContractCategory category = EmploymentContractCategory.builder()
+                .name(name)
+                .build();
+        return contractCategoryRepository.save(category);
+    }
 }
