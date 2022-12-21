@@ -30,7 +30,7 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
                     JOIN candidate_response cr on c.id = cr.candidate_id
                     LEFT OUTER JOIN bonus b on i.id = b.interview_id
                 WHERE
-                    c.job_offer_id = 1
+                    c.job_offer_id = :offer_id
                 GROUP BY
                     c.id, bonus
                 ORDER BY
