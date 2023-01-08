@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.authentication.ApplicationUser;
 import mg.softlab.sirh.security.AppUserRole;
 import mg.softlab.sirh.util.Sha256;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,8 +43,8 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public List<User> search(String username) {
-        return userRepository.searchUser(username);
+    public Page<User> search(String username, Pageable pageable) {
+        return userRepository.searchUser(username, pageable);
     }
 
     public User createUser(User user) {
@@ -52,7 +55,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public List<User> findAll() { return userRepository.findAll(); }
+    public Page<User> findAll(Pageable page) { return userRepository.findAll(page); }
 
     public User findById(Long userId) {
         return userRepository.findById(userId).orElseThrow(() ->

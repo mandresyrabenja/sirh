@@ -1,5 +1,7 @@
 package mg.softlab.sirh.user;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +16,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsernameIgnoreCase(String username);
 
     @Query("SELECT u FROM simple_user u WHERE lower(u.username) LIKE lower(concat('%', :username,'%') ) ")
-    List<User> searchUser(@Param("username") String username);
+    Page<User> searchUser(@Param("username") String username, Pageable pageable);
 
 }
