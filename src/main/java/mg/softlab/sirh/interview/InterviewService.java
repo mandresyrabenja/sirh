@@ -7,6 +7,9 @@ import mg.softlab.sirh.email.EmailService;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.candidateResult.CandidateResult;
 import mg.softlab.sirh.person.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -97,8 +100,8 @@ public class InterviewService {
      * @param jobOfferId ID de l'offre d'emploi
      * @return Resultat des candidats triées par point obtenus
      */
-    public List<CandidateResult> orderCandidateResultByPoint(Long jobOfferId) {
-        return interviewRepository.orderCandidateResponseByPoint(jobOfferId)
+    public Page<CandidateResult> orderCandidateResultByPoint(Long jobOfferId, Pageable pageable) {
+        List<CandidateResult> results = interviewRepository.orderCandidateResponseByPoint(jobOfferId)
                 .stream()
                 .map(res -> {
                     BigInteger candidateId = (BigInteger) res[0];
@@ -109,8 +112,9 @@ public class InterviewService {
                             .responsePoint(point)
                             .bonusPoint(bonus.shortValue())
                             .build();
-                    })
+                })
                 .collect(Collectors.toList());
+        return new PageImpl<CandidateResult>(results, pageable, results.size());
     }
 
 }

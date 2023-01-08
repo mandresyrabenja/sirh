@@ -1,10 +1,11 @@
 package mg.softlab.sirh.jobOffer;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -15,8 +16,8 @@ public class JobOfferService {
         jobOfferRepository.save(jobOffer);
     }
 
-    public List<JobOffer> getAvailableJobOffers() {
-        return jobOfferRepository.findByIsDone(false);
+    public Page<JobOffer> getAvailableJobOffers( Pageable pageable) {
+        return jobOfferRepository.findByIsDone(false, pageable);
     }
 
     public JobOffer findById(Long id) {

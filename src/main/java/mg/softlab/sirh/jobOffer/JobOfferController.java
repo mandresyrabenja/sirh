@@ -7,6 +7,8 @@ import mg.softlab.sirh.interview.InterviewService;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.job.JobService;
 import mg.softlab.sirh.jobOffer.candidateResult.CandidateResult;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +30,10 @@ public class JobOfferController {
      * @return le resultat des entretiens des candidats d'une poste triés par point obtenu
      */
     @GetMapping("/candidate-result")
-    public List<CandidateResult> getCandidateResult(@RequestParam("offerId") Long jobOfferId) {
-        return interviewService.orderCandidateResultByPoint(jobOfferId);
+    public Page<CandidateResult> getCandidateResult(@RequestParam("offerId") Long jobOfferId,
+                                                    @RequestParam int page,
+                                                    @RequestParam int size) {
+        return interviewService.orderCandidateResultByPoint(jobOfferId, PageRequest.of(page, size));
     }
 
     @GetMapping("{id}")
@@ -44,8 +48,9 @@ public class JobOfferController {
     }
 
     @GetMapping("/available")
-    public List<JobOffer> getAvailableJobOffers() {
-        return jobOfferService.getAvailableJobOffers();
+    public Page<JobOffer> getAvailableJobOffers(@RequestParam int page,
+                                                @RequestParam int size) {
+        return jobOfferService.getAvailableJobOffers(PageRequest.of(page, size));
     }
 
     @PostMapping
