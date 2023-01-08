@@ -1,6 +1,8 @@
 package mg.softlab.sirh.department;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -11,7 +13,9 @@ import java.util.List;
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
 
-    public List<Department> searchDepartment(String name) { return departmentRepository.searchDepartment(name); }
+    public Page<Department> searchDepartment(String name, Pageable pageable) {
+        return departmentRepository.searchDepartment(name, pageable);
+    }
 
     public void deleteDepartment(Long id) {
         Department department = findById(id);
@@ -22,8 +26,8 @@ public class DepartmentService {
         departmentRepository.save(department);
     }
 
-    public List<Department> findAll() {
-        return departmentRepository.findAll();
+    public Page<Department> findAll(Pageable pageable) {
+        return departmentRepository.findAll(pageable);
     }
 
     public Department findById(Long id) {

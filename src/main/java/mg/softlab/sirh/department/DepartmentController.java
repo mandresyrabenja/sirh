@@ -2,6 +2,8 @@ package mg.softlab.sirh.department;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,10 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @GetMapping(path = "/search")
-    public List<Department> searchDepartment(@RequestParam String name) {
-        return departmentService.searchDepartment(name);
+    public Page<Department> searchDepartment(@RequestParam String name,
+                                             @RequestParam int page,
+                                             @RequestParam int size) {
+        return departmentService.searchDepartment(name, PageRequest.of(page, size));
     }
 
     @DeleteMapping(path = "{id}")
@@ -62,8 +66,9 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<Department> findAllDepartment() {
-        return departmentService.findAll();
+    public Page<Department> findAllDepartment(@RequestParam int page,
+                                              @RequestParam int size) {
+        return departmentService.findAll(PageRequest.of(page, size));
     }
 
     @GetMapping(path = "{id}")
