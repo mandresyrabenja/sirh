@@ -5,7 +5,9 @@ import mg.softlab.sirh.employee.Employee;
 import mg.softlab.sirh.employee.EmployeeService;
 import mg.softlab.sirh.holiday.Holiday;
 import mg.softlab.sirh.holiday.HolidayService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -247,10 +249,12 @@ public class VacationService {
         return vacationRepository.findByEmployeeOrderByStartDateDesc(
                 employee,
                 PageRequest.of(0, 1)
-        ).get(0);
+        )
+                .getContent()
+                .get(0);
     }
 
-    public List<Vacation> getEmployeeVacations(Employee employee) {
-        return vacationRepository.findByEmployeeOrderByStartDateDesc(employee, PageRequest.of(0, 200));
+    public Page<Vacation> getEmployeeVacations(Employee employee, Pageable pageable) {
+        return vacationRepository.findByEmployeeOrderByStartDateDesc(employee, pageable);
     }
 }

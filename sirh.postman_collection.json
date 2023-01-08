@@ -6,6 +6,236 @@
 	},
 	"item": [
 		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create an user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"mandresy\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search user using username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "man",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/search",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete an user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{site_url}}/users/1",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "abcd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/users/2",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Gestion des comptes des employés RH"
+		},
+		{
 			"name": "department",
 			"item": [
 				{
@@ -15,7 +245,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Département de ressources humaines\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Département informatique\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,8 +281,19 @@
 						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Département finance\"\r\n}",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -171,7 +412,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "in",
+									"value": "inf",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							],
@@ -213,7 +464,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Developpeur JS\",\r\n    \"minSalary\": 500000,\r\n    \"maxSalary\": 1000000\r\n}",
+							"raw": "{\r\n    \"name\": \"M2\",\r\n    \"minSalary\": 600000,\r\n    \"maxSalary\": 1000000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,9 +492,27 @@
 				},
 				{
 					"name": "Find all job categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{site_url}}/jobcategories",
 							"host": [
@@ -255,7 +524,7 @@
 							"query": [
 								{
 									"key": "",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -367,7 +636,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "o",
+									"value": "m",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -403,8 +682,24 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"\": \"\",\r\n    \"\": 1,\r\n    \"categoryId\": 53\r\n}",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Developpeur Java",
+									"type": "text"
+								},
+								{
+									"key": "departmentId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "1",
+									"type": "text"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -412,26 +707,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{site_url}}/jobs?name=Developpeur Java&departmentId=1&categoryId=52",
+							"raw": "{{site_url}}/jobs",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"jobs"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "Developpeur Java"
-								},
-								{
-									"key": "departmentId",
-									"value": "1"
-								},
-								{
-									"key": "categoryId",
-									"value": "52"
-								}
 							]
 						}
 					},
@@ -446,8 +727,19 @@
 						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"\": \"\",\r\n    \"\": 1,\r\n    \"categoryId\": 53\r\n}",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -532,23 +824,45 @@
 				},
 				{
 					"name": "Search job using name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "ja",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{site_url}}/jobs/search?name=ja",
+							"raw": "{{site_url}}/jobs/search",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"jobs",
 								"search"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "ja"
-								}
 							]
 						}
 					},
@@ -566,7 +880,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Id Al-Fitr\",\r\n    \"date\": \"2023-04-25\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Commemoration\",\r\n    \"date\": \"2023-03-29\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -587,9 +901,32 @@
 				},
 				{
 					"name": "get all holidays",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{site_url}}/holidays",
 							"host": [
@@ -680,7 +1017,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "29",
+									"value": "com",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							],
@@ -725,203 +1072,6 @@
 			"description": "Gestion des jours feriés"
 		},
 		{
-			"name": "authentication",
-			"item": [
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/login",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"login"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "user",
-			"item": [
-				{
-					"name": "create an user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jhon\",\r\n    \"password\": \"1234\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/users",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{site_url}}/users",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get an user by id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/users/7",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "search user using username",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "username",
-									"value": "B",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{site_url}}/users/search",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"search"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete an user",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{site_url}}/users/3",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update user",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "password",
-									"value": "abcd",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{site_url}}/users/2",
-							"host": [
-								"{{site_url}}"
-							],
-							"path": [
-								"users",
-								"2"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"description": "Gestion des comptes des employés RH"
-		},
-		{
 			"name": "job offer",
 			"item": [
 				{
@@ -934,12 +1084,12 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Offre developpeur JS senior",
+									"value": "Developpeur Java",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Lorem ipsum",
+									"value": "Developpeur Java EE, Spring et Hibernate",
 									"type": "text"
 								},
 								{
@@ -972,13 +1122,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/joboffers/available",
+							"raw": "{{site_url}}/joboffers/available?page=0&size=10",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"joboffers",
 								"available"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -1016,6 +1176,16 @@
 								{
 									"key": "offerId",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -1073,7 +1243,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Jean\",\r\n    \"firstname\": \"Boo\",\r\n    \"dob\": \"2000-02-03\",\r\n    \"email\": \"jboo@gmail.com\",\r\n    \"address\": \"GHJHG\",\r\n    \"cin\": 111122225631,\r\n    \"phone\": 345268742,\r\n    \"gender\": \"m\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Mihaja\",\r\n    \"firstname\": \"Odilon\",\r\n    \"dob\": \"1999-12-23\",\r\n    \"email\": \"mihajaodilon@gmail.com\",\r\n    \"address\": \"Ambohipo\",\r\n    \"cin\": 111122225631,\r\n    \"phone\": 345268742,\r\n    \"gender\": \"m\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1101,8 +1271,19 @@
 						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1134,7 +1315,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "bo",
+									"value": "ma",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							],
@@ -1172,12 +1363,12 @@
 							"formdata": [
 								{
 									"key": "jobOfferId",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "personId",
-									"value": "152",
+									"value": "2",
 									"type": "text"
 								}
 							],
@@ -1213,6 +1404,16 @@
 								{
 									"key": "jobOfferId",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							],
@@ -1252,8 +1453,18 @@
 								},
 								{
 									"key": "criteria",
-									"value": "experience",
+									"value": "age",
 									"description": "['degree' => trier par diplôme, 'experience' => trier par année d'éxperience, 'age\" => trier du plus jeune au plus âgé]",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							],
@@ -1332,6 +1543,16 @@
 									"key": "offerId",
 									"value": "1",
 									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
 								}
 							]
 						},
@@ -1367,13 +1588,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{site_url}}/candidates/54/pdf-cv",
+							"raw": "{{site_url}}/candidates/1/pdf-cv",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"54",
+								"1",
 								"pdf-cv"
 							]
 						}
@@ -1485,17 +1706,17 @@
 							"formdata": [
 								{
 									"key": "personId",
-									"value": "153",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "degreeCatId",
-									"value": "55",
+									"value": "4",
 									"type": "text"
 								},
 								{
 									"key": "title",
-									"value": "Licence en informatique",
+									"value": "Master en informatique",
 									"type": "text"
 								},
 								{
@@ -1505,7 +1726,7 @@
 								},
 								{
 									"key": "year",
-									"value": "2022",
+									"value": "2025",
 									"type": "text"
 								},
 								{
@@ -1545,45 +1766,14 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "name",
-									"value": "jean",
+									"key": "page",
+									"value": "0",
 									"type": "text"
 								},
 								{
-									"key": "firstname",
-									"value": "baa",
+									"key": "size",
+									"value": "10",
 									"type": "text"
-								},
-								{
-									"key": "personId",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "degreeCatId",
-									"value": "3",
-									"type": "text"
-								},
-								{
-									"key": "title",
-									"value": "Licence en informatique",
-									"type": "text"
-								},
-								{
-									"key": "establishment",
-									"value": "ITU",
-									"type": "text"
-								},
-								{
-									"key": "year",
-									"value": "2022",
-									"type": "text"
-								},
-								{
-									"key": "phone",
-									"value": "345268742",
-									"type": "text",
-									"disabled": true
 								}
 							],
 							"options": {
@@ -1618,38 +1808,28 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "name",
-									"value": "jean",
-									"type": "text"
-								},
-								{
-									"key": "firstname",
-									"value": "baa",
-									"type": "text"
-								},
-								{
 									"key": "personId",
-									"value": "153",
+									"value": "2",
 									"type": "text"
 								},
 								{
 									"key": "title",
-									"value": "Informaticien",
+									"value": "Developpeur JS",
 									"type": "text"
 								},
 								{
 									"key": "company",
-									"value": "OSTIE",
+									"value": "Prise",
 									"type": "text"
 								},
 								{
 									"key": "startDate",
-									"value": "2011-06-05",
+									"value": "2015-06-05",
 									"type": "text"
 								},
 								{
 									"key": "endDate",
-									"value": "2013-06-10",
+									"value": "2017-06-10",
 									"type": "text"
 								}
 							],
@@ -1686,7 +1866,7 @@
 							"formdata": [
 								{
 									"key": "candidateId",
-									"value": "54",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -1696,7 +1876,7 @@
 								},
 								{
 									"key": "dateTime",
-									"value": "2022-10-06T11:00",
+									"value": "2023-01-06T11:00",
 									"type": "text"
 								}
 							]
@@ -1727,6 +1907,16 @@
 								{
 									"key": "offerId",
 									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -1820,17 +2010,17 @@
 							"formdata": [
 								{
 									"key": "jobOfferId",
-									"value": "2",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "question",
-									"value": "Pourquoi vous avez besoin de cet travail?",
+									"value": "Pourquoi avez-vous besoin de ce travail?",
 									"type": "text"
 								},
 								{
 									"key": "maxMark",
-									"value": "4",
+									"value": "3",
 									"type": "text"
 								}
 							]
@@ -1862,6 +2052,16 @@
 									"key": "jobOfferId",
 									"value": "1",
 									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
 								}
 							]
 						},
@@ -1892,17 +2092,17 @@
 							"formdata": [
 								{
 									"key": "candidateId",
-									"value": "54",
-									"type": "text"
-								},
-								{
-									"key": "questionId",
 									"value": "1",
 									"type": "text"
 								},
 								{
+									"key": "questionId",
+									"value": "3",
+									"type": "text"
+								},
+								{
 									"key": "mark",
-									"value": "5",
+									"value": "2",
 									"type": "text"
 								}
 							]
@@ -1934,12 +2134,12 @@
 							"formdata": [
 								{
 									"key": "interviewId",
-									"value": "5",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "bonusReason",
-									"value": "Mlay2",
+									"value": "Mlay",
 									"type": "text"
 								},
 								{
@@ -1976,7 +2176,7 @@
 							"formdata": [
 								{
 									"key": "personId",
-									"value": "203",
+									"value": "1",
 									"type": "text"
 								},
 								{
@@ -1991,7 +2191,7 @@
 								},
 								{
 									"key": "hiringDate",
-									"value": "2022-10-13",
+									"value": "2021-10-13",
 									"type": "text"
 								},
 								{
@@ -2021,7 +2221,7 @@
 								},
 								{
 									"key": "assignment",
-									"value": "abd",
+									"value": "Developpeur",
 									"type": "text"
 								}
 							]
@@ -2044,13 +2244,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/employees/151",
+							"raw": "{{site_url}}/employees/1",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"employees",
-								"151"
+								"1"
 							]
 						}
 					},
@@ -2104,6 +2304,11 @@
 									"key": "page",
 									"value": "0",
 									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
 								}
 							]
 						},
@@ -2131,13 +2336,8 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "page",
-									"value": "0",
-									"type": "text"
-								},
-								{
 									"key": "name",
-									"value": "bo",
+									"value": "man",
 									"type": "text"
 								},
 								{
@@ -2147,7 +2347,17 @@
 								},
 								{
 									"key": "departmentId",
-									"value": "53",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -2227,9 +2437,27 @@
 			"item": [
 				{
 					"name": "get all employment contract categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{site_url}}/contract-categories",
 							"host": [
@@ -2318,17 +2546,17 @@
 							"formdata": [
 								{
 									"key": "employeeId",
-									"value": "201",
+									"value": "1",
 									"type": "text"
 								},
 								{
 									"key": "startDate",
-									"value": "2022-10-28",
+									"value": "2023-01-17",
 									"type": "text"
 								},
 								{
 									"key": "endDate",
-									"value": "2022-11-02",
+									"value": "2023-01-18",
 									"type": "text"
 								},
 								{
@@ -2363,7 +2591,17 @@
 							"formdata": [
 								{
 									"key": "employeeId",
-									"value": "201",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -2381,7 +2619,7 @@
 					"response": []
 				},
 				{
-					"name": "get an employee's rest of vacation",
+					"name": "get an employee's rest of vacation number",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -2393,7 +2631,7 @@
 							"formdata": [
 								{
 									"key": "employeeId",
-									"value": "201",
+									"value": "1",
 									"type": "text"
 								}
 							]
@@ -2419,7 +2657,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY2ODc4ODQxMCwiZXhwIjoxNjY5OTI4NDAwfQ.SPzlKtsUm1UfFVIUGPpVH2c-v2Znhibi6KOBZ_UE4kBAm-XdAO-9hZqSjSCpRRgGzHJtVrDRgujkVcKWbwUB1Q",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0NFTyJ9LHsiYXV0aG9yaXR5IjoiYWRtaW4ifV0sImlhdCI6MTY3MzE3MTE4MCwiZXhwIjoxNjc0MzM0ODAwfQ.i3nI7eaghk7GgVPJButY_GjzUKhcowNDyUW016Tb0hcPjmmsHhzWCzFPNM1cLckPYLXqFyyQeqiQIEViD1CjDw",
 				"type": "string"
 			}
 		]

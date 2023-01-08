@@ -4,13 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.employee.Employee;
 import mg.softlab.sirh.employee.EmployeeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/vacations")
@@ -37,13 +38,15 @@ public class VacationController {
     }
 
     @GetMapping
-    public List<Vacation> getEmployeeVacations(@RequestParam Long employeeId) {
+    public Page<Vacation> getEmployeeVacations(@RequestParam Long employeeId,
+                                               @RequestParam int page,
+                                               @RequestParam int size) {
         try {
             Employee employee = employeeService.findById(employeeId);
-            return vacationService.getEmployeeVacations(employee);
+            return vacationService.getEmployeeVacations(employee, PageRequest.of(page, size));
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return List.of();
+            return Page.empty();
         }
     }
 
