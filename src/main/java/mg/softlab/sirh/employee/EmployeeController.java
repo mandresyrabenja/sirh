@@ -1,6 +1,5 @@
 package mg.softlab.sirh.employee;
 
-import com.google.common.base.Strings;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.employmentContract.category.ContractCategoryService;
@@ -11,6 +10,8 @@ import mg.softlab.sirh.person.Person;
 import mg.softlab.sirh.person.PersonService;
 import mg.softlab.sirh.util.file.File;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/employees")
@@ -81,12 +81,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/search")
-    public List<Employee> searchEmployee(@RequestParam(required = false) String name,
+    public Page<Employee> searchEmployee(@RequestParam(required = false) String name,
                                          @RequestParam(required = false) String jobName,
                                          @RequestParam(required = false) Long departmentId,
-                                         @RequestParam int page)
+                                         @RequestParam int page,
+                                         @RequestParam int size)
     {
-        return employeeService.searchEmployee(name, jobName, departmentId, page);
+        return employeeService.searchEmployee(name, jobName, departmentId, PageRequest.of(page, size));
     }
 
     @PostMapping
@@ -174,7 +175,9 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employee> getEmployees(@RequestParam int page) {
-        return employeeService.getEmployees(page);
+    public Page<Employee> getEmployees(@RequestParam int page,
+                                       @RequestParam int size)
+    {
+        return employeeService.getEmployees(PageRequest.of(page, size));
     }
 }

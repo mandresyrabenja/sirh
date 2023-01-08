@@ -6,13 +6,13 @@ import mg.softlab.sirh.employmentContract.EmploymentContractService;
 import mg.softlab.sirh.employmentContract.category.EmploymentContractCategory;
 import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.person.Person;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -28,11 +28,11 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> searchEmployee(String name, String jobName, Long departmentId, int page) {
+    public Page<Employee> searchEmployee(String name, String jobName, Long departmentId, Pageable pageable) {
         Specification<Employee> specification = EmployeeSpecifications.hasNameLike(name)
                 .and(EmployeeSpecifications.hasJobLike(jobName))
                 .and(EmployeeSpecifications.hasDepartment(departmentId));
-        return employeeRepository.findAll(specification, PageRequest.of(page, 10)).getContent();
+        return employeeRepository.findAll(specification, pageable);
     }
 
     public Employee createEmployee(Employee employee) { return employeeRepository.save(employee); }
@@ -86,8 +86,8 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> getEmployees(int page) {
-        return employeeRepository.findAll(PageRequest.of(page, 10)).getContent();
+    public Page<Employee> getEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 
     public Boolean existsById(Long employeeId) { return employeeRepository.existsById(employeeId); }
