@@ -1,11 +1,11 @@
 package mg.softlab.sirh.job;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -37,13 +37,13 @@ public class JobService {
         );
     }
 
-    public List<Job> findAllJobs() {
-        return jobRepository.findAll();
+    public Page<Job> findAllJobs(Pageable pageable) {
+        return jobRepository.findAll(pageable);
     }
 
     public void createJob(Job job) {
         jobRepository.save(job);
     }
 
-    public List<Job> searchJob(String name) { return jobRepository.searchJob(name); }
+    public Page<Job> searchJob(String name, Pageable pageable) { return jobRepository.searchJob(name, pageable); }
 }

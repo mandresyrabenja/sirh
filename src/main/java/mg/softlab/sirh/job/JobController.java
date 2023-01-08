@@ -6,11 +6,11 @@ import mg.softlab.sirh.department.Department;
 import mg.softlab.sirh.department.DepartmentService;
 import mg.softlab.sirh.jobCategory.JobCategory;
 import mg.softlab.sirh.jobCategory.JobCategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/jobs")
@@ -22,7 +22,11 @@ public class JobController {
     private final DepartmentService departmentService;
 
     @GetMapping("/search")
-    public List<Job> searchJob(@RequestParam String name) { return jobService.searchJob(name); }
+    public Page<Job> searchJob(@RequestParam String name,
+                               @RequestParam int page,
+                               @RequestParam int size) {
+        return jobService.searchJob(name, PageRequest.of(page, size));
+    }
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id) {
@@ -73,8 +77,9 @@ public class JobController {
     }
 
     @GetMapping
-    public List<Job> findAllJobs() {
-        return jobService.findAllJobs();
+    public Page<Job> findAllJobs(@RequestParam int page,
+                                 @RequestParam int size) {
+        return jobService.findAllJobs(PageRequest.of(page, size));
     }
 
     @PostMapping
