@@ -2,6 +2,8 @@ package mg.softlab.sirh.holiday;
 
 import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,6 +17,10 @@ public class HolidayService {
 
     public Holiday createHoliday(Holiday holiday) {
         return holidayRepository.save(holiday);
+    }
+
+    public Page<Holiday> findAllHolidays(Pageable pageable) {
+        return holidayRepository.findAll(pageable);
     }
 
     public List<Holiday> findAllHolidays() {
@@ -41,7 +47,7 @@ public class HolidayService {
         holidayRepository.delete(findById(holidayId));
     }
 
-    public List<Holiday> searchHoliday(String name) {
-        return holidayRepository.searchHoliday(name);
+    public Page<Holiday> searchHoliday(String name, Pageable pageable) {
+        return holidayRepository.searchHoliday(name, pageable);
     }
 }

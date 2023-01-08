@@ -2,13 +2,14 @@ package mg.softlab.sirh.holiday;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/holidays")
@@ -18,7 +19,11 @@ public class HolidayController {
     private final HolidayService holidayService;
 
     @GetMapping(path = "/search")
-    public List<Holiday> searchHoliday(@RequestParam String name) { return holidayService.searchHoliday(name); }
+    public Page<Holiday> searchHoliday(@RequestParam String name,
+                                       @RequestParam int page,
+                                       @RequestParam int size) {
+        return holidayService.searchHoliday(name, PageRequest.of(page, size));
+    }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Object> searchHoliday(@PathVariable("id") Long id) {
@@ -46,8 +51,9 @@ public class HolidayController {
     }
 
     @GetMapping
-    public List<Holiday> getAllHolidays() {
-        return holidayService.findAllHolidays();
+    public Page<Holiday> getAllHolidays(@RequestParam int page,
+                                        @RequestParam int size) {
+        return holidayService.findAllHolidays(PageRequest.of(page, size));
     }
 
     @PostMapping
