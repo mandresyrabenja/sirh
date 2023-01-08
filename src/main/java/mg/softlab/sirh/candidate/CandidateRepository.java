@@ -1,6 +1,8 @@
 package mg.softlab.sirh.candidate;
 
 import mg.softlab.sirh.jobOffer.JobOffer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,13 +10,15 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
+    Page<Candidate> findByJobOffer(JobOffer jobOffer, Pageable pageable);
+
     List<Candidate> findByJobOffer(JobOffer jobOffer);
 
     @Query(value = "SELECT c " +
             "FROM Candidate c JOIN c.person p JOIN p.degrees d JOIN d.category cat " +
             "WHERE c.jobOffer.id = :offerId " +
             "ORDER BY cat.level DESC")
-    List<Candidate> orderByDegree(@Param("offerId") Long jobOfferId);
+    Page<Candidate> orderByDegree(@Param("offerId") Long jobOfferId, Pageable pageable);
 
     /**
      * Trier les candidats d'une offre de travail par année d'expérience
@@ -29,5 +33,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
             nativeQuery = true)
     List<Object[]> orderByExperience(@Param("offer_id") Long jobOfferId);
 
-    List<Candidate> findByIsChoosenTrueAndJobOffer(JobOffer jobOffer);
+    Page<Candidate> findByIsChoosenTrueAndJobOffer(JobOffer jobOffer, Pageable pageable);
 }

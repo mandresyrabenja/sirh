@@ -10,6 +10,8 @@ import mg.softlab.sirh.person.Person;
 import mg.softlab.sirh.person.PersonService;
 import mg.softlab.sirh.util.file.File;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -126,12 +128,14 @@ public class CandidateController {
     }
 
     @GetMapping("/choosen")
-    public List<Candidate> getChoosenCandidates(@RequestParam Long offerId) {
+    public Page<Candidate> getChoosenCandidates(@RequestParam Long offerId,
+                                                @RequestParam int page,
+                                                @RequestParam int size) {
         try {
-            return candidateService.findChoosenCandidates(offerId);
+            return candidateService.findChoosenCandidates(offerId, PageRequest.of(page, size));
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return List.of();
+            return Page.empty();
         }
     }
 
@@ -168,19 +172,23 @@ public class CandidateController {
      * @return Liste des candidats de l'offre d'emploi triée par dimplôme, expérience ou âge
      */
     @GetMapping("/sort")
-    public List<Candidate> sortCandidate(@RequestParam Long jobOfferId,
-                                         @RequestParam String criteria) {
-        return candidateService.sortCandidate(jobOfferId, criteria);
+    public Page<Candidate> sortCandidate(@RequestParam Long jobOfferId,
+                                         @RequestParam String criteria,
+                                         @RequestParam int page,
+                                         @RequestParam int size) {
+        return candidateService.sortCandidate(jobOfferId, criteria, PageRequest.of(page, size));
     }
 
     @GetMapping
-    public List<Candidate> getCandidatesByJobOffer(@RequestParam Long jobOfferId) {
+    public Page<Candidate> getCandidatesByJobOffer(@RequestParam Long jobOfferId,
+                                                   @RequestParam int page,
+                                                   @RequestParam int size) {
         try {
             JobOffer jobOffer = jobOfferService.findById(jobOfferId);
-            return candidateService.findCandidateByJobOffer(jobOffer);
+            return candidateService.findCandidateByJobOffer(jobOffer, PageRequest.of(page, size));
         } catch (IllegalStateException e) {
             log.warn(e.getMessage());
-            return List.of();
+            return Page.empty();
         }
     }
 

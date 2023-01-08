@@ -5,6 +5,9 @@ import mg.softlab.sirh.email.EmailService;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +24,7 @@ public class CandidateService {
     private final EmailService emailService;
 
     /**
-     * Trier les candidats d'une offre d'emploi par dimplôme, expérience ou age
+     * Trier les candidats d'une offre d'emploi par diplôme, expérience ou age
      * @param jobOfferId ID de l'offre d'emploi<br>
      * @param sortValue chaîne de caractère :<br>
      *                 <ul>
@@ -31,35 +34,37 @@ public class CandidateService {
      *                 </ul>
      * @return Liste des candidats de l'offre d'emploi triée par dimplôme, expérience ou âge
      */
-    public List<Candidate> sortCandidate(Long jobOfferId, String sortValue) {
+    public Page<Candidate> sortCandidate(Long jobOfferId, String sortValue, Pageable pageable) {
         if("degree".equalsIgnoreCase(sortValue)) {
-            return candidateRepository.orderByDegree(jobOfferId);
+            return candidateRepository.orderByDegree(jobOfferId, pageable);
         }
         if("experience".equalsIgnoreCase(sortValue)) {
-            return candidateRepository.orderByExperience(jobOfferId)
+            List<Candidate> candidates = candidateRepository.orderByExperience(jobOfferId)
                     .stream()
                     .map((experience) -> {
                                 BigInteger candidateId = (BigInteger) experience[0];
                                 return candidateRepository.findById(candidateId.longValue())
-                                    .orElseThrow( () -> new IllegalStateException(
-                                        "Aucun candidature n'a " + candidateId + " comme ID") );
+                                        .orElseThrow(() -> new IllegalStateException(
+                                                "Aucun candidature n'a " + candidateId + " comme ID"));
                             }
                     )
                     .collect(Collectors.toList());
+            return new PageImpl<>(candidates, pageable, candidates.size());
         }
         if("age".equalsIgnoreCase(sortValue)) {
             JobOffer jobOffer = jobOfferService.findById(jobOfferId);
-            return candidateRepository.findByJobOffer(jobOffer)
+            List<Candidate> candidates = candidateRepository.findByJobOffer(jobOffer)
                     .stream()
                     .sorted(Comparator.comparingInt(c -> c.getPerson().getAge()))
                     .collect(Collectors.toList());
+            return new PageImpl<>(candidates, pageable, candidates.size());
         }
         throw new IllegalArgumentException("Le valeur du paramètre criteria acceptable sont 'degree', " +
                 "'experience' et 'age'. Vous avez entré " + sortValue);
     }
 
-    public List<Candidate> findCandidateByJobOffer(JobOffer jobOffer) {
-        return candidateRepository.findByJobOffer(jobOffer);
+    public Page<Candidate> findCandidateByJobOffer(JobOffer jobOffer, Pageable pageable) {
+        return candidateRepository.findByJobOffer(jobOffer, pageable);
     }
 
     public Candidate createCandidate(JobOffer jobOffer, Person person) {
@@ -115,9 +120,9 @@ public class CandidateService {
             );
     }
 
-    public List<Candidate> findChoosenCandidates(Long offerId) {
+    public Page<Candidate> findChoosenCandidates(Long offerId, Pageable pageable) {
         JobOffer jobOffer = jobOfferService.findById(offerId);
-        return candidateRepository.findByIsChoosenTrueAndJobOffer(jobOffer);
+        return candidateRepository.findByIsChoosenTrueAndJobOffer(jobOffer, pageable);
     }
 
     public boolean existsById(Long id) {
