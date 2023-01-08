@@ -75,12 +75,12 @@ public class InterviewService {
     }
 
 
-    public List<Interview> findCandidateInterview(Candidate candidate) {
-        return interviewRepository.findByCandidate(candidate);
+    public Page<Interview> findCandidateInterview(Candidate candidate, Pageable pageable) {
+        return interviewRepository.findByCandidate(candidate, pageable);
     }
 
-    public List<Interview> findJobInterviews(JobOffer offer) {
-        return interviewRepository.findByJobOffer(offer);
+    public Page<Interview> findJobInterviews(JobOffer offer, Pageable pageable) {
+        return interviewRepository.findByJobOffer(offer, pageable);
     }
 
     @Transactional

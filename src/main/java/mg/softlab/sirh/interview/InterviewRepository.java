@@ -2,6 +2,8 @@ package mg.softlab.sirh.interview;
 
 import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.jobOffer.JobOffer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface InterviewRepository extends JpaRepository<Interview, Long> {
-    List<Interview> findByJobOffer(JobOffer offer);
+    Page<Interview> findByJobOffer(JobOffer offer, Pageable pageable);
 
     /**
      * Trier le resultat des candidats par les points qu'ils ont obtenus
@@ -40,5 +42,5 @@ public interface InterviewRepository extends JpaRepository<Interview, Long> {
     )
     List<Object[]> orderCandidateResponseByPoint(@Param("offer_id") Long jobOfferId);
 
-    List<Interview> findByCandidate(Candidate candidate);
+    Page<Interview> findByCandidate(Candidate candidate, Pageable pageable);
 }

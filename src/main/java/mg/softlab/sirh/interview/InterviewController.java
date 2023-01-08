@@ -6,6 +6,8 @@ import mg.softlab.sirh.candidate.Candidate;
 import mg.softlab.sirh.candidate.CandidateService;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,20 +43,23 @@ public class InterviewController {
     public List<Interview> getInterviewCalendar() { return interviewService.findAll(); }
 
     @GetMapping
-    public List<Interview> getJobInterviews(@RequestParam(required = false) Long offerId,
-                                            @RequestParam(required = false) Long candidateId) {
+    public Page<Interview> getJobInterviews(@RequestParam(required = false) Long offerId,
+                                            @RequestParam(required = false) Long candidateId,
+                                            @RequestParam int page,
+                                            @RequestParam int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
         try {
             if(null != offerId) {
                 JobOffer jobOffer = jobOfferService.findById(offerId);
-                return interviewService.findJobInterviews(jobOffer);
+                return interviewService.findJobInterviews(jobOffer, pageRequest);
             } else if(null != candidateId) {
                 Candidate candidate = candidateService.findById(candidateId);
-                return interviewService.findCandidateInterview(candidate);
+                return interviewService.findCandidateInterview(candidate, pageRequest);
             } else {
                 throw new IllegalStateException("Une des paramètres 'offerId' et 'candidateId' doît être precisé");
             }
         } catch (IllegalStateException e) {
-            return List.of();
+            return Page.empty();
         }
     }
 
