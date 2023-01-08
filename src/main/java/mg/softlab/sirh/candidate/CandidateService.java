@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,11 +33,20 @@ public class CandidateService {
      *                  <li><b>"experience"</b> pour l'expérience</li>
      *                  <li><b>"age"</b> pour le plus jeune au plus âgé</li>
      *                 </ul>
-     * @return Liste des candidats de l'offre d'emploi triée par dimplôme, expérience ou âge
+     * @return Liste des candidats de l'offre d'emploi triée par diplôme, expérience ou âge
      */
     public Page<Candidate> sortCandidate(Long jobOfferId, String sortValue, Pageable pageable) {
         if("degree".equalsIgnoreCase(sortValue)) {
-            return candidateRepository.orderByDegree(jobOfferId, pageable);
+            List<Long> candidatesId = candidateRepository.orderByDegree(jobOfferId);
+            ArrayList<Candidate> candidates = new ArrayList<>();
+            candidatesId.forEach(System.out::println);
+            candidatesId.forEach((id) -> {
+                Candidate candidate = findById(id);
+                if(!candidates.contains(candidate)) {
+                    candidates.add(candidate);
+                }
+            });
+            return new PageImpl<>(candidates, pageable, candidates.size());
         }
         if("experience".equalsIgnoreCase(sortValue)) {
             List<Candidate> candidates = candidateRepository.orderByExperience(jobOfferId)

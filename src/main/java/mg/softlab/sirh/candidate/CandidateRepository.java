@@ -14,11 +14,12 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     List<Candidate> findByJobOffer(JobOffer jobOffer);
 
-    @Query(value = "SELECT c " +
+
+    @Query(value = "SELECT c.id " +
             "FROM Candidate c JOIN c.person p JOIN p.degrees d JOIN d.category cat " +
             "WHERE c.jobOffer.id = :offerId " +
             "ORDER BY cat.level DESC")
-    Page<Candidate> orderByDegree(@Param("offerId") Long jobOfferId, Pageable pageable);
+    List<Long> orderByDegree(@Param("offerId") Long jobOfferId);
 
     /**
      * Trier les candidats d'une offre de travail par année d'expérience
