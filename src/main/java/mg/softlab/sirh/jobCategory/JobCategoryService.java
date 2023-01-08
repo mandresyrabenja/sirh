@@ -1,10 +1,11 @@
 package mg.softlab.sirh.jobCategory;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class JobCategoryService {
             bdJobCategory.setMaxSalary(newJobCategoryData.getMaxSalary());
         }
 
-        if(newJobCategoryData.getName() != null && newJobCategoryData.getName() != "") {
+        if(newJobCategoryData.getName() != null && !"".equals(newJobCategoryData.getName())) {
             bdJobCategory.setName(newJobCategoryData.getName());
         }
     }
@@ -38,15 +39,15 @@ public class JobCategoryService {
         );
     }
 
-    public List<JobCategory> findAll() {
-        return jobCategoryRepository.findAll();
+    public Page<JobCategory> findAll(Pageable pageable) {
+        return jobCategoryRepository.findAll(pageable);
     }
 
     public void createJobCategory(JobCategory jobCategory) {
         jobCategoryRepository.save(jobCategory);
     }
 
-    public List<JobCategory> searchJobCat(String name) {
-        return jobCategoryRepository.searchJobCat(name);
+    public Page<JobCategory> searchJobCat(String name, Pageable pageable) {
+        return jobCategoryRepository.searchJobCat(name, pageable);
     }
 }

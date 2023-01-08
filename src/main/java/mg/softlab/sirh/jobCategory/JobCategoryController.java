@@ -3,11 +3,11 @@ package mg.softlab.sirh.jobCategory;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/jobcategories")
@@ -17,7 +17,11 @@ public class JobCategoryController {
     private final JobCategoryService jobCategoryService;
 
     @GetMapping(path = "search")
-    public List<JobCategory> searchJobCategory(@RequestParam String name) { return jobCategoryService.searchJobCat(name); }
+    public Page<JobCategory> searchJobCategory(@RequestParam String name,
+                                               @RequestParam int page,
+                                               @RequestParam int size) {
+        return jobCategoryService.searchJobCat(name, PageRequest.of(page, size));
+    }
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> deleteJobCategory(@PathVariable Long id) {
@@ -68,8 +72,9 @@ public class JobCategoryController {
     }
 
     @GetMapping
-    public List<JobCategory> findAll() {
-        return jobCategoryService.findAll();
+    public Page<JobCategory> findAll(@RequestParam int page,
+                                     @RequestParam int size) {
+        return jobCategoryService.findAll(PageRequest.of(page, size));
     }
 
     @PostMapping
