@@ -2,6 +2,8 @@ package mg.softlab.sirh.person;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +19,17 @@ public class PersonController {
     private final PersonService personService;
 
     @GetMapping("/search")
-    public List<Person> searchPerson(@RequestParam String name) { return personService.searchPerson(name); }
+    public Page<Person> searchPerson(@RequestParam String name,
+                                     @RequestParam int page,
+                                     @RequestParam int size) {
+        return personService.searchPerson(name, PageRequest.of(page, size));
+    }
 
     @GetMapping
-    public List<Person> getAllPersons() { return personService.findAllPersons(); }
+    public Page<Person> getAllPersons(@RequestParam int page,
+                                      @RequestParam int size) {
+        return personService.findAllPersons(PageRequest.of(page, size));
+    }
 
     @PostMapping
     public ResponseEntity<Object> createPerson(@RequestBody Person person) {

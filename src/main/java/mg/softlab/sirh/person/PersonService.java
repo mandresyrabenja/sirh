@@ -1,6 +1,8 @@
 package mg.softlab.sirh.person;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +24,8 @@ public class PersonService {
         );
     }
 
-    public List<Person> findAllPersons() {
-        return personRepository.findAll();
+    public Page<Person> findAllPersons(Pageable pageable) {
+        return personRepository.findAll(pageable);
     }
 
     public Person findByEmail(String email) {
@@ -32,5 +34,5 @@ public class PersonService {
         );
     }
 
-    public List<Person> searchPerson(String name) { return personRepository.searchByName(name); }
+    public Page<Person> searchPerson(String name, Pageable pageable) { return personRepository.searchByName(name, pageable); }
 }
