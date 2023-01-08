@@ -1,18 +1,17 @@
 package mg.softlab.sirh.employmentContract.category;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class ContractCategoryService {
     private final ContractCategoryRepository contractCategoryRepository;
 
-    public List<EmploymentContractCategory> findAll() {
-        return contractCategoryRepository.findAll();
+    public Page<EmploymentContractCategory> findAll(Pageable pageable) {
+        return contractCategoryRepository.findAll(pageable);
     }
 
     public EmploymentContractCategory findById(Long id) {

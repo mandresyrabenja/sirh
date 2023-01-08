@@ -2,11 +2,11 @@ package mg.softlab.sirh.employmentContract.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Controlleur HTTP de l'entité EmploymentCategory
@@ -29,6 +29,9 @@ public class ContractCategoryController {
     }
 
     @GetMapping
-    public List<EmploymentContractCategory> getAllContractCategories() { return contractCategoryService.findAll(); }
+    public Page<EmploymentContractCategory> getAllContractCategories(@RequestParam int page,
+                                                                     @RequestParam int size) {
+        return contractCategoryService.findAll(PageRequest.of(page, size));
+    }
 
 }
