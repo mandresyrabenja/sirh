@@ -2,9 +2,9 @@ package mg.softlab.sirh.question;
 
 import lombok.AllArgsConstructor;
 import mg.softlab.sirh.jobOffer.JobOffer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -19,8 +19,8 @@ public class QuestionService {
         return questionRepository.save(entity);
     }
 
-    public List<Question> getJobOfferQuestion(JobOffer jobOffer) {
-        return questionRepository.findByJobOffer(jobOffer);
+    public Page<Question> getJobOfferQuestion(JobOffer jobOffer, Pageable pageable) {
+        return questionRepository.findByJobOffer(jobOffer, pageable);
     }
 
     public Question findById(Long id) {

@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/questions")
@@ -19,12 +19,14 @@ public class QuestionController {
     private final JobOfferService jobOfferService;
 
     @GetMapping
-    public List<Question> getJobOfferQuestion(@RequestParam Long jobOfferId) {
+    public Page<Question> getJobOfferQuestion(@RequestParam Long jobOfferId,
+                                              @RequestParam int page,
+                                              @RequestParam int size) {
         try{
             JobOffer jobOffer = jobOfferService.findById(jobOfferId);
-            return questionService.getJobOfferQuestion(jobOffer);
+            return questionService.getJobOfferQuestion(jobOffer, PageRequest.of(page, size));
         }catch (IllegalStateException e) {
-            return List.of();
+            return Page.empty();
         }
     }
 
