@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/candidates")
@@ -52,6 +52,16 @@ public class CandidateController {
         }
     }
 
+    @GetMapping(path = "/{id}/pdf-cover-letter-path")
+    public String getCoverLetterPdfPath(@PathVariable("id") Long id) {
+        try {
+            return Paths.get(FILE_DIRECTORY, "candidates", "lm",  id.toString() + ".pdf").toAbsolutePath().toString();
+        } catch (InvalidPathException | SecurityException e) {
+            log.warn(e.getMessage());
+            return e.getMessage();
+        }
+    }
+
     /**
      * Avoir le fichier PDF contenant le CV d'un candidat
      * @param id ID du candidat
@@ -66,6 +76,16 @@ public class CandidateController {
         } catch (IOException e) {
             log.warn(e.getMessage());
             return null;
+        }
+    }
+
+    @GetMapping(path = "/{id}/pdf-cv-path")
+    public String getCvPdfPath(@PathVariable("id") Long id) {
+        try {
+            return Paths.get(FILE_DIRECTORY, "candidates", "cv",  id.toString() + ".pdf").toAbsolutePath().toString();
+        } catch (InvalidPathException | SecurityException e) {
+            log.warn(e.getMessage());
+            return e.getMessage();
         }
     }
 

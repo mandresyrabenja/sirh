@@ -1150,13 +1150,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/joboffers/3",
+							"raw": "{{site_url}}/joboffers/1",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"joboffers",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -1453,7 +1453,7 @@
 								},
 								{
 									"key": "criteria",
-									"value": "age",
+									"value": "degree",
 									"description": "['degree' => trier par diplôme, 'experience' => trier par année d'éxperience, 'age\" => trier du plus jeune au plus âgé]",
 									"type": "text"
 								},
@@ -1493,13 +1493,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{site_url}}/candidates/55",
+							"raw": "{{site_url}}/candidates/1",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"55"
+								"1"
 							]
 						}
 					},
@@ -1612,18 +1612,18 @@
 								{
 									"key": "coverLetter",
 									"type": "file",
-									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+									"src": "/D:/Pro/CV/LM-Mandresy-RABENJAHARISON.pdf"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{site_url}}/candidates/54/pdf-cover-letter",
+							"raw": "{{site_url}}/candidates/1/pdf-cover-letter",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"54",
+								"1",
 								"pdf-cover-letter"
 							]
 						}
@@ -1649,13 +1649,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{site_url}}/candidates/54/pdf-cover-letter",
+							"raw": "{{site_url}}/candidates/1/pdf-cover-letter",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"54",
+								"1",
 								"pdf-cover-letter"
 							]
 						}
@@ -1678,14 +1678,65 @@
 							]
 						},
 						"url": {
-							"raw": "{{site_url}}/candidates/54/pdf-cv",
+							"raw": "{{site_url}}/candidates/1/pdf-cv",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"candidates",
-								"54",
+								"1",
 								"pdf-cv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get candidate pdf cv path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/candidates/1/pdf-cv-path",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"1",
+								"pdf-cv-path"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get candidate cover letter pdf path",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv",
+									"type": "file",
+									"src": "/D:/Pro/CV/CV-Mandresy-RABENJAHARISON.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{site_url}}/candidates/1/pdf-cover-letter-path",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"1",
+								"pdf-cover-letter-path"
 							]
 						}
 					},
@@ -1979,6 +2030,16 @@
 								{
 									"key": "candidateId",
 									"value": "55",
+									"type": "text"
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "10",
 									"type": "text"
 								}
 							]
@@ -2391,13 +2452,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{site_url}}/employees/52/photo",
+							"raw": "{{site_url}}/employees/1/photo",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"employees",
-								"52",
+								"1",
 								"photo"
 							]
 						}
@@ -2417,14 +2478,40 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{site_url}}/employees/52/photo",
+							"raw": "{{site_url}}/employees/1/photo",
 							"host": [
 								"{{site_url}}"
 							],
 							"path": [
 								"employees",
-								"52",
+								"1",
 								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get an employee's photo path",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{site_url}}/employees/1/photo-path",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"employees",
+								"1",
+								"photo-path"
 							]
 						}
 					},

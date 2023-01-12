@@ -27,6 +27,7 @@ public class InterviewService {
 
     public List<Interview> findAll() { return interviewRepository.findAll(); }
 
+    @Transactional
     public Interview createInterview(Candidate candidate, JobOffer jobOffer, LocalDateTime dateTime) {
         Interview interview = new Interview();
         interview.setCandidate(candidate);

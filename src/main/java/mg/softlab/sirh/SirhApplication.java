@@ -10,6 +10,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
@@ -24,7 +25,7 @@ public class SirhApplication {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
 		corsConfiguration.setAllowedOrigins(
-				Arrays.asList(
+				Collections.singletonList(
 						"http://localhost:3000"
 				)
 		);
