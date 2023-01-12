@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
@@ -51,6 +52,22 @@ public class EmployeeController {
         } catch (IOException e) {
             log.warn(e.getMessage());
             return null;
+        }
+    }
+
+
+    /**
+     * Avoir le path du photo d'un employé
+     * @param id ID de l'employé
+     * @return le path photo de l'employé
+     */
+    @GetMapping(path = "/{id}/photo-path")
+    public String getEmployeePhotoPath(@PathVariable("id") Long id) {
+        try {
+            return Paths.get(FILE_DIRECTORY, "employee",  id.toString() + ".png").toAbsolutePath().toString();
+        } catch (InvalidPathException | SecurityException e) {
+            log.warn(e.getMessage());
+            return e.getMessage();
         }
     }
 
