@@ -1741,6 +1741,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get candidate job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{site_url}}/candidates/1/job",
+							"host": [
+								"{{site_url}}"
+							],
+							"path": [
+								"candidates",
+								"1",
+								"job"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

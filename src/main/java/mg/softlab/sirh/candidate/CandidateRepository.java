@@ -1,5 +1,6 @@
 package mg.softlab.sirh.candidate;
 
+import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,4 +36,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
     List<Object[]> orderByExperience(@Param("offer_id") Long jobOfferId);
 
     Page<Candidate> findByIsChoosenTrueAndJobOffer(JobOffer jobOffer, Pageable pageable);
+
+    @Query(value = "SELECT j FROM Candidate c JOIN c.jobOffer o JOIN o.job j WHERE c.id = :id")
+    Job getCandidateJob(@Param("id") Long id);
 }

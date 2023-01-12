@@ -2,6 +2,7 @@ package mg.softlab.sirh.candidate;
 
 import lombok.AllArgsConstructor;
 import mg.softlab.sirh.email.EmailService;
+import mg.softlab.sirh.job.Job;
 import mg.softlab.sirh.jobOffer.JobOffer;
 import mg.softlab.sirh.jobOffer.JobOfferService;
 import mg.softlab.sirh.person.Person;
@@ -137,5 +138,9 @@ public class CandidateService {
 
     public boolean existsById(Long id) {
         return candidateRepository.existsById(id);
+    }
+
+    public Job getCandidateJob(Long id) {
+        return candidateRepository.getCandidateJob(id);
     }
 }

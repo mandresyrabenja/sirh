@@ -79,6 +79,16 @@ public class CandidateController {
         }
     }
 
+    @GetMapping(path = "{id}/job")
+    public ResponseEntity<Object> getCandidateJob(@PathVariable("id") Long id) {
+        try{
+            return ResponseEntity.ok(candidateService.getCandidateJob(id));
+        }catch (IllegalStateException e) {
+           log.warn(e.getMessage());
+           return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
     @GetMapping(path = "/{id}/pdf-cv-path")
     public String getCvPdfPath(@PathVariable("id") Long id) {
         try {
